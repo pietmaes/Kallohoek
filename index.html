@@ -43,6 +43,8 @@ header .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--la
 .item .code{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#fff;background:var(--moss);min-width:26px;text-align:center;border-radius:2px;padding:1px 0}
 .item .code.b{background:var(--bark)}
 .item .code.s{background:#9AA98F}
+.item .code.p{background:#B5733A}
+.item .code.t{background:#7E8B5A}
 .item .lat{font-family:'Fraunces',serif;font-style:italic;font-size:15px}
 .item .nl{font-size:12px;color:var(--label)}
 .item .n{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--label)}
@@ -605,44 +607,126 @@ const DATA = {
    "vorm": "verlaagde zone die regenwater opvangt en laat infiltreren",
    "maat": "—",
    "wiki": "Wadi (infiltratievoorziening)"
+  },
+  "pave:A": {
+   "lat": "Granulaat + honingraat",
+   "nl": "Halfverharding — oprit / parking",
+   "cat": "verharding (matenplan)",
+   "aantal": "zone A",
+   "vorm": "grind in honingraatstabilisatie",
+   "maat": "128 m²",
+   "wiki": null
+  },
+  "pave:B": {
+   "lat": "Kassei",
+   "nl": "Kasseiverharding",
+   "cat": "verharding (matenplan)",
+   "aantal": "zone B",
+   "vorm": "natuursteen kasseien",
+   "maat": "119 m²",
+   "wiki": "Kinderkopje"
+  },
+  "pave:C": {
+   "lat": "Tegels",
+   "nl": "Tegelverharding",
+   "cat": "verharding (matenplan)",
+   "aantal": "zone C",
+   "vorm": "tegels",
+   "maat": "127 m²",
+   "wiki": null
+  },
+  "pave:D": {
+   "lat": "Breuksteen",
+   "nl": "Breuksteen / siergrind",
+   "cat": "verharding (matenplan)",
+   "aantal": "zone D",
+   "vorm": "losse breuksteen",
+   "maat": "oppervlakte niet vermeld",
+   "wiki": "Breuksteen"
+  },
+  "HT": {
+   "lat": "Heuvel / Talud",
+   "nl": "Reliëf — grondmodellering",
+   "cat": "terrein (matenplan)",
+   "aantal": "3 zones op plan",
+   "vorm": "opgehoogd reliëf / hellingen",
+   "maat": "—",
+   "wiki": "Talud"
   }
  },
- "boszones": [
-  {
-   "id": "bosA",
-   "cx": 770,
-   "cy": 640,
-   "rx": 280,
-   "ry": 390
-  },
-  {
-   "id": "bosA2",
-   "cx": 300,
-   "cy": 1740,
-   "rx": 85,
-   "ry": 360
-  },
-  {
-   "id": "bosB",
-   "cx": 1500,
-   "cy": 600,
-   "rx": 150,
-   "ry": 470
-  },
-  {
-   "id": "bosC",
-   "cx": 620,
-   "cy": 4260,
-   "rx": 380,
-   "ry": 210
-  }
- ],
+ "boszones": [],
  "wadi": {
-  "cx": 905,
-  "cy": 3480,
-  "rx": 165,
-  "ry": 115
- }
+  "cx": 929,
+  "cy": 3674,
+  "rx": 180,
+  "ry": 120
+ },
+ "zones": [
+  {
+   "key": "HT",
+   "label": "Heuvel/Talud",
+   "cx": 520,
+   "cy": 915,
+   "rx": 180,
+   "ry": 430
+  },
+  {
+   "key": "HT",
+   "label": "Heuvel/Talud",
+   "cx": 1256,
+   "cy": 1590,
+   "rx": 300,
+   "ry": 260
+  },
+  {
+   "key": "HT",
+   "label": "Heuvel/Talud",
+   "cx": 907,
+   "cy": 3915,
+   "rx": 300,
+   "ry": 190
+  },
+  {
+   "key": "pave:D",
+   "label": "D · Breuksteen",
+   "cx": 1115,
+   "cy": 2378,
+   "rx": 85,
+   "ry": 85
+  },
+  {
+   "key": "pave:A",
+   "label": "A · Granulaat",
+   "cx": 1718,
+   "cy": 3015,
+   "rx": 95,
+   "ry": 95
+  },
+  {
+   "key": "pave:B",
+   "label": "B · Kassei",
+   "cx": 1442,
+   "cy": 2555,
+   "rx": 85,
+   "ry": 85
+  },
+  {
+   "key": "pave:C",
+   "label": "C · Tegels",
+   "cx": 1170,
+   "cy": 2792,
+   "rx": 85,
+   "ry": 85
+  },
+  {
+   "key": "WADI",
+   "label": "Wadi",
+   "cx": 929,
+   "cy": 3674,
+   "rx": 180,
+   "ry": 120
+  }
+ ]
 };
 const S = DATA.species;
 const svgNS = "http://www.w3.org/2000/svg";
@@ -651,21 +735,14 @@ const R = 92;
 
 function el(n,attrs){const e=document.createElementNS(svgNS,n);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
 
-/* Bos zones */
-DATA.boszones.forEach(z=>{
-  const g=el('g',{class:'spot','data-key':'BOS',tabindex:0,role:'button'});
+/* Zones (matenplan 01.06.2026: verharding, heuvel/talud, wadi) */
+DATA.zones.forEach(z=>{
+  const sp=S[z.key];
+  const g=el('g',{class:'spot zone-spot','data-key':z.key,tabindex:0,role:'button','aria-label':(sp?sp.lat:z.label)});
   g.appendChild(el('ellipse',{class:'zone',cx:z.cx,cy:z.cy,rx:z.rx,ry:z.ry}));
-  const t=el('text',{x:z.cx,y:z.cy,'text-anchor':'middle'});t.textContent='BOS';g.appendChild(t);
+  const t=el('text',{x:z.cx,y:z.cy-z.ry-14,'text-anchor':'middle'});t.textContent=z.label;g.appendChild(t);
   overlay.appendChild(g);
 });
-/* Wadi */
-{
-  const w=DATA.wadi;
-  const g=el('g',{class:'spot','data-key':'WADI',tabindex:0,role:'button'});
-  g.appendChild(el('ellipse',{class:'zone',cx:w.cx,cy:w.cy,rx:w.rx,ry:w.ry}));
-  const t=el('text',{x:w.cx,y:w.cy-130,'text-anchor':'middle'});t.textContent='WADI';g.appendChild(t);
-  overlay.appendChild(g);
-}
 /* Trees */
 DATA.trees.forEach(tr=>{
   const g=el('g',{class:'spot tree','data-key':tr.code,tabindex:0,role:'button','aria-label':S[tr.code].lat});
@@ -701,7 +778,10 @@ h2('Struiken — wintergroen');
 Object.keys(S).filter(k=>k.startsWith('s:')&&S[k].cat.includes('wintergroen')).forEach(k=>legend.appendChild(row(k,'❄','s','')));
 h2('Struiken — bladverliezend');
 Object.keys(S).filter(k=>k.startsWith('s:')&&S[k].cat.includes('bladverliezend')).forEach(k=>legend.appendChild(row(k,'🍂','s','')));
-h2('Overig');
+h2('Verharding — matenplan 01.06.2026');
+[['pave:A','A'],['pave:B','B'],['pave:C','C'],['pave:D','D']].forEach(([k,c])=>legend.appendChild(row(k,c,'p',S[k].maat||'')));
+h2('Terrein & water');
+legend.appendChild(row('HT','⛰','t','3 zones'));
 legend.appendChild(row('WADI','◌','s',''));
 
 /* ---------- photos via Wikipedia REST ---------- */
