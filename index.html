@@ -86,6 +86,7 @@ footer{margin-top:26px;font-family:'IBM Plex Mono',monospace;font-size:11px;colo
 .zoomctl{position:absolute;right:10px;bottom:10px;z-index:6;display:flex;flex-direction:column;gap:6px}
 .zoomctl button{width:40px;height:40px;border:1px solid #243027;background:rgba(255,255,255,.93);font-size:21px;line-height:1;cursor:pointer;border-radius:7px;color:#243027;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .zoomctl button:active{background:var(--moss-soft,#e7eee0)}
+.item.armed{background:var(--moss-soft,#e7eee0);outline:1px dashed var(--moss,#3d6b4a)}
 </style>
 </head>
 <body>
@@ -1021,14 +1022,14 @@ DATA.zones.forEach(z=>{
   const sp=S[z.key];
   const g=el('g',{class:'spot zone-spot','data-key':z.key,tabindex:0,role:'button','aria-label':(sp?sp.lat:z.label)});
   g.appendChild(el('ellipse',{class:'zone',cx:z.cx,cy:z.cy,rx:z.rx,ry:z.ry}));
-  const t=el('text',{x:z.cx,y:z.cy-z.ry-14,'text-anchor':'middle'});t.textContent=z.label;g.appendChild(t);
+  const t=el('text',{x:z.cx,y:z.cy-z.ry-14,'text-anchor':'middle'});t.textContent=((S[z.key]&&S[z.key].nl)?S[z.key].nl:z.label);g.appendChild(t);
   overlay.appendChild(g);
 });
 /* Trees */
 DATA.trees.forEach(tr=>{
   const g=el('g',{class:'spot tree','data-key':tr.code,tabindex:0,role:'button','aria-label':S[tr.code].lat});
   g.appendChild(el('circle',{class:'zone',cx:tr.x,cy:tr.y,r:R}));
-  const t=el('text',{x:tr.x,y:tr.y-R-14,'text-anchor':'middle'});t.textContent=S[tr.code].lat;g.appendChild(t);
+  const t=el('text',{x:tr.x,y:tr.y-R-14,'text-anchor':'middle'});t.textContent=(S[tr.code].nl||S[tr.code].lat);g.appendChild(t);
   overlay.appendChild(g);
 });
 
@@ -1043,12 +1044,27 @@ function row(key,codeTxt,codeCls,extra){
   const sp=S[key];
   const b=document.createElement('button');b.className='item';b.dataset.key=key;
   b.innerHTML=`<span class="code ${codeCls}">${codeTxt}</span><span><span class="lat">${sp.lat}</span><br><span class="nl">${sp.nl||''}</span></span><span class="n">${extra||''}</span>`;
-  b.addEventListener('click',()=>openCard(key));
+  b.addEventListener('click',()=>{
+    if(window.__noHover){
+      if(window.__armedRow===key){ window.__armRow(null); openCard(key); }
+      else { window.__armRow(key,b); }
+    } else { openCard(key); }
+  });
   b.addEventListener('mouseenter',()=>hl(key,true));
   b.addEventListener('mouseleave',()=>hl(key,false));
   return b;
 }
 function hl(key,on){document.querySelectorAll(`.spot[data-key="${CSS.escape(key)}"]`).forEach(g=>g.classList.toggle('hl',on));}
+window.__noHover=window.matchMedia('(hover: none)').matches||window.matchMedia('(pointer: coarse)').matches;
+window.__armedRow=null; window.__armedBtn=null;
+window.__armRow=function(key,btn){
+  if(window.__armedRow){ hl(window.__armedRow,false); if(window.__armedBtn)window.__armedBtn.classList.remove('armed'); }
+  window.__armedRow=key||null; window.__armedBtn=btn||null;
+  if(key){ hl(key,true); if(btn)btn.classList.add('armed');
+    const g=document.querySelector(`.spot[data-key="${CSS.escape(key)}"]`);
+    if(g){ const pw=document.querySelector('.planwrap'); if(pw&&pw.getBoundingClientRect().bottom<80||pw.getBoundingClientRect().top>window.innerHeight-80){ pw.scrollIntoView({behavior:'smooth',block:'center'}); } }
+  }
+};
 function h2(t){const h=document.createElement('h2');h.textContent=t;legend.appendChild(h);}
 
 h2('Bomen & solitairs');
@@ -1081,6 +1097,43 @@ async function fetchThumb(title,big){
   imgCache[key]=null;return null;
 }
 
+/* Zoek bij voorkeur een 'habitus'/hele-plant-foto op Wikimedia Commons i.p.v. een bloemdetail */
+const habitCache={};
+async function fetchHabitImage(sp){
+  const name=(sp.wiki||sp.lat)||''; if(!name) return null;
+  const genus=name.split(' ')[0].toLowerCase();
+  const cat=sp.cat||'';
+  const term=cat.indexOf('boom')>=0?'tree':(cat.indexOf('heester')>=0?'shrub':'plant');
+  const q=name+' '+term+' habit';
+  if(habitCache[q]!==undefined) return habitCache[q];
+  const BAD=/(flower|floret|bloem|fleur|bl(?:ü|u)te|blossom|infloresc|close-?up|closeup|\bdetail|macro|leaf|leaves|blad|foliage|fruit|berry|seed|bark|\bcone|\bbud|petal|stamen|pistil|\broot|seedling|distribution|\brange\b|illustration|drawing|herbarium|\bmap\b|botanical)/i;
+  const GOOD=/(habit|habitus|\btree\b|boom|shrub|struik|\bbush\b|whole|growth|garden|park|avenue|hedge|\bhaag\b|tuin|form\b)/i;
+  try{
+    const url='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=25&prop=imageinfo&iiprop=url&iiurlwidth=900&gsrsearch='+encodeURIComponent(q);
+    const r=await fetch(url); if(!r.ok){habitCache[q]=null;return null;}
+    const j=await r.json();
+    const pages=(j.query&&j.query.pages)?Object.values(j.query.pages):[];
+    let best=null,bestScore=-1e9,idx=0;
+    for(const p of pages){
+      idx++;
+      const title=(p.title||'').replace(/^File:/,'');
+      const tl=title.toLowerCase();
+      if(genus && tl.indexOf(genus)<0) continue;                 // juiste soort
+      const ii=p.imageinfo&&p.imageinfo[0]; if(!ii||!ii.url) continue;
+      if(!/\.(jpg|jpeg|png)$/i.test(ii.url)) continue;
+      let s=0;
+      if(BAD.test(title)) s-=6;
+      if(GOOD.test(title)) s+=5;
+      const w=ii.thumbwidth||ii.width, hh=ii.thumbheight||ii.height;
+      if(w&&hh){ if(term==='tree'&&hh>=w) s+=2; if(hh>=w*0.85) s+=1; }
+      s += Math.max(0, 2.5 - (idx-1)*0.1);
+      if(s>bestScore){ bestScore=s; best={src:ii.thumburl||ii.url,page:ii.descriptionurl||''}; }
+    }
+    habitCache[q]=(best && bestScore>0)?best:null;   // enkel gebruiken als er een plausibele hele-plant-foto is
+    return habitCache[q];
+  }catch(e){ habitCache[q]=null; return null; }
+}
+
 /* ---------- modal ---------- */
 const scrim=document.getElementById('scrim'),inner=document.getElementById('cardInner');
 document.getElementById('close').onclick=closeCard;
@@ -1093,7 +1146,8 @@ function gLink(q){return 'https://www.google.com/search?tbm=isch&q='+encodeURICo
 async function openCard(key){
   const sp=S[key];
   scrim.classList.add('open');scrim.setAttribute('aria-hidden','false');
-  const searchQ=sp.lat+' '+(sp.nl?sp.nl.split('/')[0]:'boom');
+  const _habit=(sp.cat&&sp.cat.indexOf('boom')>=0)?'boom':((sp.cat&&sp.cat.indexOf('heester')>=0)?'struik':'plant');
+  const searchQ=sp.lat+' '+_habit+' habitus volledige plant';
   let specs=`
     <div><dt>Aantal</dt><dd>${sp.aantal||'—'}</dd></div>
     <div><dt>Vorm</dt><dd>${sp.vorm}</dd></div>
@@ -1125,7 +1179,7 @@ async function openCard(key){
   }
   const photo=document.getElementById('photo');
   if(sp.img){photo.innerHTML=`<img src="${sp.img}" alt="${sp.lat}">`;return;}
-  const res=await fetchThumb(sp.wiki,true);
+  let res=await fetchHabitImage(sp); if(!res) res=await fetchThumb(sp.wiki,true);
   if(res){
     photo.innerHTML=`<img src="${res.src}" alt="${sp.lat}">`;
     if(res.page){
@@ -1165,7 +1219,7 @@ async function openCard(key){
       if(a<bestA){bestA=a;best=g;} }
     return best; }
   function clearPeek(){ if(activePeek){activePeek.classList.remove('hl');activePeek=null;} peekbar.hidden=true; }
-  function setPeek(g){ clearPeek(); activePeek=g; g.classList.add('hl');
+  function setPeek(g){ if(window.__armRow)window.__armRow(null); clearPeek(); activePeek=g; g.classList.add('hl');
     var key=g.dataset.key, sp=(typeof S!=='undefined')?S[key]:null;
     var nm=sp?sp.lat:key, nl=(sp&&sp.nl)?(' \u00b7 '+sp.nl):'';
     peekbar.innerHTML='<b>'+nm+'</b>'+nl+'<span class="pk">tik nogmaals om te openen</span>';
@@ -1204,7 +1258,7 @@ async function openCard(key){
     var r=planwrap.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, z=b.dataset.z;
     if(z==='in')zoomAt(cx,cy,scale*1.5); else if(z==='out')zoomAt(cx,cy,scale/1.5); else {scale=1;tx=0;ty=0;apply();} });
 
-  var _open=window.openCard; if(typeof _open==='function'){ window.openCard=function(){ clearPeek(); return _open.apply(this,arguments); }; }
+  var _open=window.openCard; if(typeof _open==='function'){ window.openCard=function(){ clearPeek(); if(window.__armRow)window.__armRow(null); return _open.apply(this,arguments); }; }
 })();
 </script>
 
