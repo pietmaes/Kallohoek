@@ -1,6 +1,0 @@
-This file was added to trigger a GitHub Pages rebuild.
-
-Timestamp: 2026-07-03T13:40:00Z
-Created by: GitHub Copilot on behalf of user pietmaes
-
-If this commit is meant only to trigger a Pages rebuild, you can remove this file later.
