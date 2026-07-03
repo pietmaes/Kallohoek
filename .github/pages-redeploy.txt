@@ -1,0 +1,4 @@
+Redeploy trigger file
+Timestamp: 2026-07-03T00:00:00Z
+Triggered by: GitHub Copilot
+Purpose: Force a GitHub Pages rebuild for pietmaes/Kallohoek
