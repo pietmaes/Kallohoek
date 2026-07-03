@@ -877,6 +877,27 @@ function closeCard(){scrim.classList.remove('open');scrim.setAttribute('aria-hid
 
 function gLink(q){return 'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q);}
 
+
+/* Extra bron: iNaturalist (veldfoto's, meestal volledige plant) als Commons/Wikipedia niets geschikts hebben */
+const inatCache={};
+async function fetchINatImage(sp){
+  let name=(sp.wiki||sp.lat)||''; if(!name) return null;
+  name=name.replace(/[\u2018\u2019'"].*$/,'').replace(/\u00d7/g,' ').replace(/\s+/g,' ').trim();
+  name=name.split(' ').slice(0,2).join(' ');
+  if(!name) return null;
+  if(inatCache[name]!==undefined) return inatCache[name];
+  try{
+    const r=await fetch('https://api.inaturalist.org/v1/taxa?per_page=3&q='+encodeURIComponent(name));
+    if(!r.ok){inatCache[name]=null;return null;}
+    const j=await r.json();
+    const res=(j.results||[]).find(t=>t.iconic_taxon_name==='Plantae'&&t.default_photo&&t.default_photo.medium_url)||null;
+    if(!res){inatCache[name]=null;return null;}
+    let src=res.default_photo.medium_url.replace('/medium.','/large.');
+    inatCache[name]={src:src,page:'https://www.inaturalist.org/taxa/'+res.id,srcName:'iNaturalist'};
+    return inatCache[name];
+  }catch(e){inatCache[name]=null;return null;}
+}
+
 async function openCard(key){
   const sp=S[key];
   scrim.classList.add('open');scrim.setAttribute('aria-hidden','false');
@@ -914,15 +935,15 @@ async function openCard(key){
   }
   const photo=document.getElementById('photo');
   if(sp.img){photo.innerHTML=`<img src="${sp.img}" alt="${sp.lat}">`;return;}
-  let res=await fetchHabitImage(sp); if(!res) res=await fetchThumb(sp.wiki,true);
+  let res=await fetchHabitImage(sp); if(!res) res=await fetchINatImage(sp); if(!res) res=await fetchThumb(sp.wiki,true);
   if(res){
     photo.innerHTML=`<img src="${res.src}" alt="${sp.lat}">`;
     if(res.page){
-      const a=document.createElement('a');a.href=res.page;a.target='_blank';a.rel='noopener';a.textContent='wikipedia ↗';
+      const a=document.createElement('a');a.href=res.page;a.target='_blank';a.rel='noopener';a.textContent=(res.srcName||'wikipedia')+' ↗';
       document.getElementById('links').appendChild(a);
     }
   }else{
-    photo.innerHTML=`<div class="ph">Geen foto gevonden via Wikipedia.<br>Gebruik “meer foto’s” hieronder.</div>`;
+    photo.innerHTML=`<div class="ph">Geen foto gevonden via Wikipedia/Commons of iNaturalist.<br>Gebruik “meer foto’s” hieronder.</div>`;
   }
 }
 </script>
