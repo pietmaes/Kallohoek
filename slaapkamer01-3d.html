@@ -41,13 +41,14 @@ li{display:flex;gap:10px;align-items:baseline}
   <header>
     <div>
       <h1>Slaapkamer 01 als kinderkamer</h1>
-      <p class="sub">Kallohoekstraat · verdieping · voor twee broertjes plus logee</p>
+      <p class="sub">Kallohoekstraat · verdieping · voor twee broertjes (3 en 5) plus logee</p>
     </div>
     <div class="views" role="group" aria-label="Camerastand">
       <button id="v-over" aria-pressed="true">Overzicht</button>
       <button id="v-door" aria-pressed="false">Vanuit de deur</button>
       <button id="v-mural" aria-pressed="false">Postermuur</button>
       <button id="v-photo" aria-pressed="false">Foto</button>
+      <button id="v-desk" aria-pressed="false">Knutseltafel</button>
       <button id="v-win" aria-pressed="false">Vanaf het terras</button>
       <button id="v-bath" aria-pressed="false">Badkamer</button>
     </div>
@@ -62,7 +63,8 @@ li{display:flex;gap:10px;align-items:baseline}
     <div class="card">
       <h2>In de kamer</h2>
       <ul>
-        <li><span class="sw" style="background:#6b5a4c"></span>Bestaande kasten inkom<span class="k">42 / 59 cm diep</span></li>
+        <li><span class="sw" style="background:#6b5a4c"></span>Kasten inkom (links en naast toilet)<span class="k">42 / 59 cm diep</span></li>
+        <li><span class="sw" style="background:#e2cfb2"></span>Schrijf-, teken- en knutseltafel<span class="k">130 × 50, h 58</span></li>
         <li><span class="sw" style="background:#3f8f86"></span>Bed 1, links<span class="k">90 × 200</span></li>
         <li><span class="sw" style="background:#d9a441"></span>Bed 2, rechts<span class="k">90 × 200</span></li>
         <li><span class="sw" style="background:#c9776a"></span>Onderschuifbed logee, uitgetrokken<span class="k">90 × 180</span></li>
@@ -158,11 +160,20 @@ box(0,3.0,2.54,2.6,5.74,5.80,mat.frame,glazing);
 [0,1.42,2.94].forEach(x=>box(x,x+0.06,0,H,5.74,5.80,mat.frame,glazing));
 [[0.06,1.42],[1.48,2.94]].forEach(([a,b])=>{const p=box(a,b,0.06,2.54,5.755,5.785,mat.glass,glazing);p.castShadow=false;});
 
-box(0,0.42,0,2.4,0.12,2.14,mat.walnut);
 box(1.45,2.02,0,2.4,0.12,1.55,mat.walnut);
-box(1.45,2.95,0,2.4,1.55,2.14,mat.walnut);
+box(0,0.42,0,2.4,0.12,2.14,mat.walnut);
 [[0.425,0.7],[0.425,1.4]].forEach(([x,z])=>box(x,x+0.02,1.0,1.3,z,z+0.02,mat.chrome));
-[1.9,2.6].forEach(x=>box(x,x+0.02,1.0,1.3,2.145,2.165,mat.chrome));
+box(1.70,3.0,0.55,0.58,1.55,2.05,mat.bedwood);
+[[1.72,2.0],[2.94,2.0],[1.72,1.57]].forEach(([x,z])=>box(x,x+0.04,0,0.55,z,z+0.04,mat.bedwood));
+box(2.55,2.98,0,0.50,1.57,2.03,mat.white);
+[0.16,0.32].forEach(y=>box(2.71,2.81,y,y+0.02,2.03,2.035,mat.chrome));
+function chair(x,m){box(x,x+0.30,0.30,0.33,1.95,2.25,m);[[x,1.95],[x+0.26,1.95],[x,2.21],[x+0.26,2.21]].forEach(([xx,z])=>box(xx,xx+0.04,0,0.30,z,z+0.04,mat.bedwood));box(x,x+0.30,0.33,0.60,2.22,2.25,m);}
+chair(1.82,mat.teal);chair(2.20,mat.ochre);
+box(2.05,2.95,0.75,1.45,1.55,1.565,M(0xd9b98c));
+[[0.85,1.15,2.12,2.36,0xffffff],[1.0,1.32,2.45,2.68,0xffe27a],[0.82,1.08,2.72,2.90,0x9fd3ff],[1.18,1.4,2.10,2.30,0xff9db5]].forEach(([y0,y1,x0,x1,c])=>box(x0,x1,y0,y1,1.565,1.57,M(c)));
+box(1.90,2.20,0.58,0.585,1.65,1.95,mat.white);box(2.25,2.47,0.58,0.585,1.66,1.94,M(0xfff4c2));
+box(1.76,1.82,0.58,0.70,1.62,1.68,mat.coral);[0x3f8f86,0xd9a441,0x7fa6c6].forEach((c,i)=>box(1.78+i*0.015,1.79+i*0.015,0.70,0.77,1.64,1.65,M(c)));
+box(2.45,2.49,0.58,0.95,1.58,1.62,mat.frame);box(2.45,2.49,0.93,0.95,1.62,1.86,mat.frame);box(2.41,2.53,0.86,0.93,1.80,1.90,mat.ochre);
 
 function bed(x0,duvet,pillow){
   const z0=2.75,z1=4.75,x1=x0+0.90;
@@ -273,6 +284,7 @@ const views={
   'v-door':{p:[0.95,1.25,0.25],t:[1.6,0.7,5.0],low:false},
   'v-mural':{p:[2.7,1.35,4.2],t:[0,1.25,3.9],low:false},
   'v-photo':{p:[0.55,1.4,3.75],t:[3.0,1.45,3.75],low:false},
+  'v-desk':{p:[1.2,1.45,3.1],t:[2.5,0.65,1.7],low:false},
   'v-win':{p:[1.5,1.35,7.2],t:[1.6,0.7,2.4],low:false},
   'v-bath':{p:[2.45,1.45,5.45],t:[4.2,0.9,3.3],low:true}
 };
