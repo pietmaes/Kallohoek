@@ -65,16 +65,17 @@ li{display:flex;gap:10px;align-items:baseline}
     <div class="card">
       <h2>Meubilair (detailplan 1/20)</h2>
       <ul>
-        <li><span class="sw" style="background:#9a8f86"></span>Wandkast, 6 deuren, Plato volcano<span class="k">404 × 44, h 262</span></li>
+        <li><span class="sw" style="background:#46322a"></span>Wandkast, 6 deuren, donkere eik<span class="k">404 × 44, h 262</span></li>
+        <li><span class="sw" style="background:#0d0b0a"></span>Uitgefreesde grepen, verticaal<span class="k">42 cm</span></li>
         <li><span class="sw" style="background:#e8e4df;border:1px solid var(--line)"></span>2 vakken kastroede, 1 vak leggers<span class="k">3 × 133,4</span></li>
-        <li><span class="sw" style="background:#9a8f86"></span>Wijnwand met wandbekleding<span class="k">230 breed</span></li>
+        <li><span class="sw" style="background:#46322a"></span>Wijnwand met wandbekleding<span class="k">230 breed</span></li>
         <li><span class="sw" style="background:#f2c46b"></span>4 leggers met ledlijn, ± 25 flessen elk<span class="k">± 100 flessen</span></li>
       </ul>
     </div>
     <div class="card">
       <h2>Ruimtes (grondplan 1/50)</h2>
       <ul>
-        <li><span class="sw" style="background:#4b3f38"></span>Zwevende trap, 16 massieve treden<span class="k">120 breed</span></li>
+        <li><span class="sw" style="background:#46322a"></span>Zwevende trap en wandbekleding, donkere eik<span class="k">120 breed</span></li>
         <li><span class="sw" style="background:#1e1f20"></span>Stalen buisleuning met 2 spijlen<span class="k">h 95</span></li>
         <li><span class="sw" style="background:#b9bec2"></span>Lift met deur aan de hal<span class="k">150 × 150</span></li>
         <li><span class="sw" style="background:#d6d1c8"></span>Berging 03<span class="k">150 × 230</span></li>
@@ -191,6 +192,7 @@ tube([XB,yb+0.05,zb],[XB,yb+0.05,zb+0.12],0.02);
 const ward=new THREE.Group(); scene.add(ward);
 const SW=4.0/3;
 box(0,4.04,0,H,0,0.02,mat.carcass,ward);
+box(0,4.04,0.05,H-0.02,0.40,0.415,mat.handle,ward).visible=false;
 box(0,4.04,0,0.05,0.02,0.42,mat.volcanoDark,ward);
 box(0,4.04,H-0.02,H,0.02,0.42,mat.carcass,ward);
 [0,SW,2*SW,4.02].forEach(x=>box(x,x+0.02,0.05,H-0.02,0.02,0.42,mat.carcass,ward));
@@ -204,20 +206,44 @@ box(0,4.04,H-0.02,H,0.02,0.42,mat.carcass,ward);
 [[0.43,0xe0b44c],[0.79,0x6aa39a],[1.15,0xd98a75],[1.51,0x7fa6c6]].forEach(([y,c])=>{box(2*SW+0.12,2*SW+0.62,y,y+0.25,0.06,0.38,M(c),ward);box(2*SW+0.72,2*SW+1.22,y,y+0.22,0.06,0.38,M(c),ward);});
 box(0,4.04,H-0.03,H-0.01,0.48,0.52,mat.ledCool);
 
+function oakTex(rx){
+  const c=document.createElement('canvas');c.width=512;c.height=2048;const g=c.getContext('2d');
+  g.fillStyle='#46322a';g.fillRect(0,0,512,2048);
+  for(let i=0;i<6;i++){const x=Math.random()*512;g.fillStyle=`rgba(${i%2?92:30},${i%2?66:20},${i%2?52:14},.10)`;g.fillRect(x,0,40+Math.random()*90,2048);}
+  let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(let i=0;i<260;i++){
+    const x=rnd()*512,w=0.6+rnd()*2.6,l=0.18+rnd()*0.5,amp=1+rnd()*5,f=0.002+rnd()*0.006,ph=rnd()*6;
+    g.strokeStyle=rnd()<0.55?`rgba(28,17,11,${0.08+rnd()*0.18})`:`rgba(122,90,70,${0.05+rnd()*0.12})`;
+    g.lineWidth=w;g.beginPath();
+    for(let y=0;y<=2048;y+=16){const xx=x+Math.sin(y*f+ph)*amp;y?g.lineTo(xx,y):g.moveTo(xx,y);}
+    g.stroke();
+  }
+  for(let i=0;i<40;i++){const x=rnd()*512,y=rnd()*2048;g.fillStyle=`rgba(15,12,10,${0.2+rnd()*0.3})`;g.fillRect(x,y,1+rnd()*2,20+rnd()*60);}
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,1);t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;
+}
+mat.oak=new THREE.MeshStandardMaterial({map:oakTex(1),roughness:.62});
+mat.oakWide=new THREE.MeshStandardMaterial({map:oakTex(3.4),roughness:.62});
+mat.handle=M(0x0d0b0a,{roughness:.95});
+mat.millEdge=M(0x7a5a47,{roughness:.7});
+mat.cladding.map=oakTex(5.5);mat.cladding.color.set(0xffffff);mat.cladding.needsUpdate=true;
+(function(){const t=oakTex(1);t.center.set(.5,.5);t.rotation=Math.PI/2;t.repeat.set(0.15,3);mat.volcanoDark.map=t;mat.volcanoDark.color.set(0xffffff);mat.volcanoDark.needsUpdate=true;})();
+(function(){const t=oakTex(1);t.center.set(.5,.5);t.rotation=Math.PI/2;t.repeat.set(0.5,1);mat.stair.map=t;mat.stair.color.set(0xffffff);mat.stair.needsUpdate=true;})();
 const leaves=[];const LW=4.04/6;
 for(let k=0;k<6;k++){
   const hingeLeft=k%2===0; const hx=hingeLeft?k*LW:(k+1)*LW;
   const piv=new THREE.Group(); piv.position.set(hx,0,0.44); scene.add(piv);
   const sx=hingeLeft?0:-LW;
-  const leaf=box(sx+0.002,sx+LW-0.002,0.05,H-0.005,-0.02,0,mat.volcano,piv);
-  box(sx+0.002,sx+LW-0.002,0.325,0.335,0,0.001,mat.groove,piv);
+  const leaf=box(sx+0.0008,sx+LW-0.0008,0.05,H-0.005,-0.02,0,mat.oak,piv);
+  const hx0=hingeLeft?LW-0.075:-LW+0.055;
+  box(hx0,hx0+0.022,0.98,1.40,-0.013,0.0006,mat.handle,piv);
+  box(hx0-0.003,hx0,0.98,1.40,-0.013,0.0004,mat.millEdge,piv);
   piv.userData.dir=hingeLeft?-1:1; leaves.push(piv);
 }
 let doorsOpen=false,doorT=0,doorTarget=0;
 document.getElementById('doors').addEventListener('click',()=>{doorsOpen=!doorsOpen;doorTarget=doorsOpen?1:0;
   const b=document.getElementById('doors');b.setAttribute('aria-pressed',String(doorsOpen));b.textContent=doorsOpen?'Kast sluiten':'Kast openen';});
 
-box(1.74,4.04,0,H,7.66,7.68,mat.volcano);
+box(1.74,4.04,0,H,7.66,7.68,mat.oakWide);
 const shelfTops=[1.69,1.32,0.93];
 shelfTops.forEach(t=>{box(1.74,4.04,t-0.06,t,7.27,7.66,mat.volcanoDark);box(1.76,4.02,t-0.067,t-0.06,7.30,7.34,mat.led);});
 box(1.74,4.04,0.19,0.58,7.27,7.66,mat.volcanoDark);
@@ -247,7 +273,7 @@ function setWalls(isLow){
 const views={
   'v-over':{p:[7.4,7.6,10.2],t:[2.0,0.4,3.7],low:true},
   'v-stair':{p:[3.55,1.6,7.25],t:[2.6,1.4,1.6],low:false},
-  'v-ward':{p:[3.55,1.65,4.9],t:[1.9,1.15,0.2],low:false},
+  'v-ward':{p:[3.75,1.6,3.3],t:[2.0,1.2,0.2],low:false},
   'v-lift':{p:[3.55,1.6,2.6],t:[0.6,1.1,1.85],low:false},
   'v-wine':{p:[3.85,1.45,4.7],t:[3.0,0.95,7.6],low:false}
 };
