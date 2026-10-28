@@ -69,7 +69,7 @@ li{display:flex;gap:10px;align-items:baseline}
         <li><span class="sw" style="background:#0d0b0a"></span>Uitgefreesde grepen, verticaal<span class="k">42 cm</span></li>
         <li><span class="sw" style="background:#e8e4df;border:1px solid var(--line)"></span>2 vakken kastroede, 1 vak leggers<span class="k">3 × 133,4</span></li>
         <li><span class="sw" style="background:#46322a"></span>Wijnwand met wandbekleding<span class="k">230 breed</span></li>
-        <li><span class="sw" style="background:#f2c46b"></span>4 leggers met ledlijn, ± 25 flessen elk<span class="k">± 100 flessen</span></li>
+        <li><span class="sw" style="background:#f2c46b"></span>4 leggers met ledlijn onderaan, ± 25 flessen elk<span class="k">± 100 flessen</span></li>
       </ul>
     </div>
     <div class="card">
@@ -248,6 +248,21 @@ const shelfTops=[1.69,1.32,0.93];
 shelfTops.forEach(t=>{box(1.74,4.04,t-0.06,t,7.27,7.66,mat.volcanoDark);box(1.76,4.02,t-0.067,t-0.06,7.30,7.34,mat.led);});
 box(1.74,4.04,0.19,0.58,7.27,7.66,mat.volcanoDark);
 box(1.76,4.02,0.183,0.19,7.30,7.34,mat.led);
+(function(){
+  const c=document.createElement('canvas');c.width=16;c.height=256;const g=c.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,256);gr.addColorStop(0,'rgba(255,214,140,0.85)');gr.addColorStop(0.35,'rgba(255,200,120,0.28)');gr.addColorStop(1,'rgba(255,190,110,0)');
+  g.fillStyle=gr;g.fillRect(0,0,16,256);
+  const tex=new THREE.CanvasTexture(c);
+  const gm=new THREE.MeshBasicMaterial({map:tex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false});
+  const ledHot=new THREE.MeshStandardMaterial({color:0xfff4d6,emissive:0xffcf7a,emissiveIntensity:2.2});
+  [...shelfTops,0.19].forEach(t=>{
+    const yb=t===0.19?0.183:t-0.067;
+    box(1.76,4.02,yb-0.004,yb,7.29,7.33,ledHot);
+    const h=Math.min(0.32,yb-0.02);
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(2.28,h),gm);p.rotation.y=Math.PI;p.position.set(2.89,yb-h/2,7.655);scene.add(p);
+    const pl=new THREE.PointLight(0xffc56e,0.35,1.1,2);pl.position.set(2.89,yb-0.05,7.40);scene.add(pl);
+  });
+})();
 (function(){
   const rows=[...shelfTops,0.58], per=25, n=rows.length*per;
   const body=new THREE.CylinderGeometry(0.038,0.038,0.22,14);body.rotateX(Math.PI/2);
