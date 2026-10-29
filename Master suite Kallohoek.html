@@ -1,0 +1,363 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Master suite Kallohoek</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: kop met titel en camerastanden, groot 3D-venster, daaronder legenda en kanttekeningen */
+:root{
+  --bg:#f0eeeb; --panel:#ffffff; --fg:#22201d; --muted:#615b55; --line:#dcd6cf; --accent:#8a7360; --accent-fg:#ffffff;
+  --scene:#e7e3de;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#151413; --panel:#1d1b19; --fg:#ece8e3; --muted:#a59d95; --line:#2f2b28; --accent:#cdb49d; --accent-fg:#211a14; --scene:#1f1d1b; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151413; --panel:#1d1b19; --fg:#ece8e3; --muted:#a59d95; --line:#2f2b28; --accent:#cdb49d; --accent-fg:#211a14; --scene:#1f1d1b; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(24px,4vw,34px);line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px}
+.views{display:flex;flex-wrap:wrap;gap:6px}
+button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:7px 12px;border-radius:999px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#stage{position:relative;width:100%;height:clamp(380px,64vh,720px);border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--scene)}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--muted);background:var(--panel);padding:4px 10px;border-radius:999px;opacity:.92}
+.tools{position:absolute;right:12px;bottom:10px;display:flex;gap:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.card h2{font-family:var(--display);font-weight:500;font-size:17px;margin:0 0 10px}
+ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+li{display:flex;gap:10px;align-items:baseline}
+.sw{width:11px;height:11px;border-radius:3px;flex:none;transform:translateY(1px)}
+.k{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;margin-left:auto;white-space:nowrap}
+.note{color:var(--muted);font-size:13.5px;margin:0}
+.note + .note{margin-top:8px}
+@media (max-width:520px){.hint{display:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Master suite: slaapkamer, dressing en badkamer</h1>
+      <p class="sub">Kallohoekstraat · gelijkvloers · meubeldetailplannen Ante-Architecten, 27 oktober 2026</p>
+    </div>
+    <div class="views" role="group" aria-label="Camerastand">
+      <button id="v-over" aria-pressed="true">Overzicht</button>
+      <button id="v-bed" aria-pressed="false">Bedwand</button>
+      <button id="v-dress" aria-pressed="false">Dressing</button>
+      <button id="v-bath" aria-pressed="false">Badkamermeubel</button>
+      <button id="v-tub" aria-pressed="false">Bad</button>
+      <button id="v-shower" aria-pressed="false">Douche</button>
+    </div>
+  </header>
+
+  <div id="stage">
+    <span class="hint">Slepen om te draaien · scrollen of knijpen om te zoomen</span>
+    <div class="tools"><button id="leds" aria-pressed="false">Ledlijnen aan</button><button id="walls" aria-pressed="true">Muren laag</button></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Slaapkamer</h2>
+      <ul>
+        <li><span class="sw" style="background:#d9c6aa"></span>Bed op houten plateau, matras 200<span class="k">247 breed</span></li>
+        <li><span class="sw" style="background:#d9c6aa"></span>Zwevende nachtkastjes met 3 knoppen<span class="k">92 × 52</span></li>
+        <li><span class="sw" style="background:#f2c46b"></span>Kunstwerk met ledlijn rond, vanaf 106 cm<span class="k">125 × 180</span></li>
+        <li><span class="sw" style="background:#d9c6aa"></span>Wand tegen dressing in eikfineer, met deur<span class="k">452 lang</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Dressing en badkamer</h2>
+      <ul>
+        <li><span class="sw" style="background:#8f8578"></span>2 kastwanden met glazen kaderdeuren<span class="k">344,5 lang</span></li>
+        <li><span class="sw" style="background:#d9c6aa"></span>Eiland met glazen blad<span class="k">260 × 75</span></li>
+        <li><span class="sw" style="background:#e3d8c8"></span>Badkamermeubel, 2 kranen, spiegel<span class="k">527,5 breed</span></li>
+        <li><span class="sw" style="background:#f4f2ee;border:1px solid var(--line)"></span>Vrijstaand bad aan het raam<span class="k">± 180 × 85</span></li>
+        <li><span class="sw" style="background:#e3d8c8"></span>Inloopdouche met ledlijn in de vloer<span class="k">± 95 × 200</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Kanttekeningen</h2>
+      <p class="note">De onderlinge ligging van de drie ruimtes heb ik afgeleid uit de planfragmenten op de detailbladen, omdat ik het grondplan van het gelijkvloers niet heb. Plafondhoogte 3,00 m is een schatting uit de aanzichten.</p>
+      <p class="note">Aangenomen: vloerafwerking, de lichte eik en het natuursteenmotief, de vorm van bad en bed (de hoogte en het hoofdeinde van het bed staan nog als vraag op het plan) en het kunstwerk.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+const stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.outputEncoding=THREE.sRGBEncoding;
+stage.prepend(renderer.domElement);
+
+const scene=new THREE.Scene();
+function sceneBg(){const c=getComputedStyle(document.documentElement).getPropertyValue('--scene').trim()||'#e7e3de';scene.background=new THREE.Color(c);}
+sceneBg();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',sceneBg);new MutationObserver(sceneBg).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}catch(e){}
+
+const camera=new THREE.PerspectiveCamera(45,1,0.05,120);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.maxPolarAngle=Math.PI*0.49; controls.minDistance=0.6; controls.maxDistance=26;
+
+const hemi=new THREE.HemisphereLight(0xffffff,0xb9b0a4,0.62);scene.add(hemi);
+const sun=new THREE.DirectionalLight(0xfff3e2,0.8);
+sun.position.set(15,10,9); sun.target.position.set(5,0,4);
+sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:1,far:40});
+sun.shadow.bias=-0.0005;
+scene.add(sun,sun.target);
+const fill=new THREE.DirectionalLight(0xe4ebff,0.3); fill.position.set(-5,6,-4); scene.add(fill);
+
+function woodTex(base,dark,light,rx,rot){
+  const c=document.createElement('canvas');c.width=512;c.height=2048;const g=c.getContext('2d');
+  g.fillStyle=base;g.fillRect(0,0,512,2048);
+  let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(let i=0;i<240;i++){
+    const x=rnd()*512,w=0.6+rnd()*2.4,amp=1+rnd()*5,f=0.002+rnd()*0.006,ph=rnd()*6;
+    g.strokeStyle=rnd()<0.55?`rgba(${dark},${0.06+rnd()*0.14})`:`rgba(${light},${0.06+rnd()*0.14})`;
+    g.lineWidth=w;g.beginPath();
+    for(let y=0;y<=2048;y+=16){const xx=x+Math.sin(y*f+ph)*amp;y?g.lineTo(xx,y):g.moveTo(xx,y);}
+    g.stroke();
+  }
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,1);
+  if(rot){t.center.set(.5,.5);t.rotation=Math.PI/2;}
+  t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;
+}
+function stoneTex(rx,ry){
+  const c=document.createElement('canvas');c.width=1024;c.height=1024;const g=c.getContext('2d');
+  g.fillStyle='#e6dccd';g.fillRect(0,0,1024,1024);
+  let seed=5;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(let i=0;i<60;i++){const x=rnd()*1024,y=rnd()*1024,r=60+rnd()*200;g.fillStyle=`rgba(${rnd()<.5?'210,196,176':'240,233,222'},.10)`;g.beginPath();g.ellipse(x,y,r*1.6,r*0.18,0,0,Math.PI*2);g.fill();}
+  for(let i=0;i<70;i++){
+    const y=rnd()*1024,h=1+rnd()*3,x=rnd()*1024,w=80+rnd()*500;
+    g.fillStyle=rnd()<0.6?`rgba(176,150,120,${0.05+rnd()*0.12})`:`rgba(255,250,240,${0.1+rnd()*0.2})`;
+    g.fillRect(x,y,w,h);g.fillRect(x-1024,y,w,h);
+  }
+  for(let i=0;i<300;i++){g.fillStyle=`rgba(150,120,95,${0.08+rnd()*0.18})`;g.fillRect(rnd()*1024,rnd()*1024,2+rnd()*8,1+rnd()*2);}
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,ry||1);
+  t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;
+}
+const M=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.8,metalness:0},o||{}));
+const mat={
+  floor:new THREE.MeshStandardMaterial({map:woodTex('#cdb999','140,112,82','236,222,198',8,true),roughness:.7}),
+  wall:M(0xf5f3ef),
+  oak:new THREE.MeshStandardMaterial({map:woodTex('#d9c6aa','150,120,88','240,228,208',1),roughness:.65}),
+  oakWide:new THREE.MeshStandardMaterial({map:woodTex('#d9c6aa','150,120,88','240,228,208',6),roughness:.65}),
+  stone:new THREE.MeshStandardMaterial({map:stoneTex(2,2),roughness:.75}),
+  stoneFloor:new THREE.MeshStandardMaterial({map:stoneTex(3,3),roughness:.6}),
+  frame:M(0x8f8578,{roughness:.5,metalness:.3}),
+  glassDoor:new THREE.MeshStandardMaterial({color:0xcfc8bd,transparent:true,opacity:.32,roughness:.1,metalness:.1}),
+  glass:new THREE.MeshStandardMaterial({color:0xb8d3e3,transparent:true,opacity:.2,roughness:.05,metalness:.1}),
+  winFrame:M(0x2f2d2b,{roughness:.5}),
+  mirror:M(0xdde5e8,{roughness:.12,metalness:.25}),
+  steel:M(0xb9bcbe,{metalness:.75,roughness:.35}),
+  white:M(0xf6f4f0,{roughness:.35}),
+  linen:M(0xe7e0d4),duvet:M(0xcfc3b2),plinth:M(0x3b342e),
+  led:new THREE.MeshStandardMaterial({color:0xe9e4dc,emissive:0xffd28a,emissiveIntensity:0}),
+  velvet:M(0x5d4a40,{roughness:.95}),curtain:M(0xeee8de,{roughness:.95})
+};
+
+function box(x0,x1,y0,y1,z0,z1,m,group){
+  const g=new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0);
+  g.translate((x1-x0)/2,(y1-y0)/2,(z1-z0)/2);
+  const mesh=new THREE.Mesh(g,m); mesh.position.set(x0,y0,z0);
+  mesh.castShadow=true; mesh.receiveShadow=true; (group||scene).add(mesh); return mesh;
+}
+const H=3.0;
+const walls=new THREE.Group(); scene.add(walls);
+const W=(x0,x1,z0,z1,y0,y1,m)=>box(x0,x1,y0||0,y1||H,z0,z1,m||mat.wall,walls);
+function round(cx,cz,r,m){const c=new THREE.Mesh(new THREE.CylinderGeometry(r,r,H,32),m);c.geometry.translate(0,H/2,0);c.position.set(cx,0,cz);c.castShadow=c.receiveShadow=true;walls.add(c);}
+function glassPane(x0,x1,z0,z1,y0,y1){box(x0,x1,y0,y1,z0,z1,mat.glass).castShadow=false;}
+
+box(-1.2,10.2,-0.01,0,-0.3,8.4,mat.floor);
+box(0,5.275,0,0.006,0,3.0,mat.stoneFloor);
+box(0,0.95,0,0.006,3.0,5.0,mat.stoneFloor);
+
+W(-0.25,5.5,-0.3,0,0,H,mat.stone);
+W(-0.25,0,0,0.10,0,H,mat.stone); W(-0.25,0,2.62,5.14,0,H,mat.stone);
+box(-0.12,-0.08,0,H,0.10,2.62,mat.winFrame).scale.set(1,1,1);
+glassPane(-0.11,-0.09,0.12,2.60,0.02,H-0.02);
+W(5.275,5.5,-0.3,0.25,0,H,mat.stone); W(5.275,5.5,2.85,3.4,0,H,mat.stone);
+glassPane(5.38,5.40,0.27,2.83,0.02,H-0.02);
+[0.25,1.55,2.83].forEach(z=>box(5.36,5.42,0,H,z,z+0.02,mat.winFrame));
+W(-0.25,0.95,5.0,5.14,0,H,mat.stone);
+W(0.95,1.09,3.0,6.90); W(0.95,1.09,7.95,7.98); W(0.95,1.09,6.90,7.95,2.15,H);
+box(0.95,1.09,0,H,3.0,5.0,mat.stone,walls).scale.set(1,1,1);
+W(1.09,2.32,3.0,3.4,0,H,mat.stone); round(2.32,3.2,0.2,mat.stone);
+round(3.97,3.2,0.2,mat.stone); W(3.97,5.36,3.0,3.4,0,H,mat.stone);
+W(2.52,3.77,3.0,3.4,2.55,H);
+W(5.22,5.36,3.4,6.90); W(5.22,5.36,7.85,7.98); W(5.22,5.36,6.90,7.85,2.15,H);
+W(0.80,2.52,7.98,8.40); W(3.77,5.36,7.98,8.40); W(2.52,3.77,7.98,8.40,0,0.45); W(2.52,3.77,7.98,8.40,2.40,H);
+glassPane(2.52,3.77,0.45,2.40,8.18,8.20);
+W(5.36,10.2,3.0,3.40);
+W(5.36,10.2,7.92,8.34);
+W(10.01,10.2,3.40,3.45); W(10.01,10.2,7.87,7.92);
+[3.45,5.66,7.85].forEach(z=>box(10.0,10.06,0,H,z,z+0.02,mat.winFrame));
+glassPane(10.02,10.04,3.47,7.85,0.02,H-0.02);
+
+box(0,1.21,0,H,0,0.45,mat.stone,walls);
+box(1.21,1.47,0,H,0,0.30,mat.stone,walls);
+[0.9,1.5,2.1].forEach(y=>box(1.21,1.47,y,y+0.03,0,0.30,mat.oak));
+box(4.07,5.275,0,H,0,0.45,mat.stone,walls);
+box(3.875,4.07,0,H,0,0.30,mat.stone,walls);
+[0.9,1.5,2.1].forEach(y=>box(3.875,4.07,y,y+0.03,0,0.30,mat.oak));
+[0.60,1.21].forEach(x=>box(x-0.003,x+0.003,0.05,H-0.05,0.45,0.452,mat.plinth));
+[4.67].forEach(x=>box(x-0.003,x+0.003,0.05,H-0.05,0.45,0.452,mat.plinth));
+box(1.47,3.875,0.06,0.92,0,0.50,mat.stone);
+box(1.50,3.845,0,0.06,0,0.44,mat.plinth);
+[2.27,3.07].forEach(x=>box(x-0.003,x+0.003,0.06,0.92,0.50,0.502,mat.plinth));
+box(1.47,3.875,0.92,0.95,0,0.50,mat.stone);
+[2.07,3.27].forEach(x=>{box(x-0.28,x+0.28,0.94,0.952,0.10,0.42,M(0xd8cdbd,{roughness:.4}));
+  const t=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.30,12),mat.steel);t.position.set(x,1.10,0.05);scene.add(t);
+  const s=new THREE.Mesh(new THREE.CylinderGeometry(0.01,0.01,0.14,12),mat.steel);s.rotation.x=Math.PI/2;s.position.set(x,1.24,0.12);scene.add(s);});
+box(1.50,3.845,1.0,2.95,0.0,0.015,mat.mirror);
+box(1.50,3.845,0.955,0.965,0.015,0.03,mat.led);
+
+(function(){
+  const outer=new THREE.Mesh(new THREE.CylinderGeometry(1,0.92,0.56,48),mat.white);
+  outer.scale.set(0.43,1,0.9);outer.position.set(4.55,0.28,1.60);outer.castShadow=true;outer.receiveShadow=true;scene.add(outer);
+  const inner=new THREE.Mesh(new THREE.CylinderGeometry(1,1,0.01,48),M(0xdfe6e8,{roughness:.15}));
+  inner.scale.set(0.36,1,0.82);inner.position.set(4.55,0.555,1.60);scene.add(inner);
+  const f=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,1.0,12),mat.steel);f.position.set(4.55,0.5,2.65);scene.add(f);
+  const sp=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.22,12),mat.steel);sp.rotation.x=Math.PI/2;sp.position.set(4.55,0.95,2.55);scene.add(sp);
+})();
+
+box(0.10,0.90,2.30,2.31,3.70,4.10,mat.steel);
+box(0.38,0.42,2.31,H,3.88,3.92,mat.steel);
+box(0.02,0.05,1.0,1.2,4.6,4.62,mat.steel);
+box(0.02,0.93,0.006,0.012,4.92,4.96,mat.led);
+box(0.30,0.62,0.007,0.010,3.9,4.6,mat.plinth);
+
+function wardrobe(xBack,xFront,dir){
+  const x0=Math.min(xBack,xFront),x1=Math.max(xBack,xFront);
+  box(x0,x1,0,2.36,3.44,3.46,mat.oak); box(x0,x1,0,2.36,6.865,6.885,mat.oak);
+  box(dir>0?x0:x1-0.02,dir>0?x0+0.02:x1,0,2.36,3.46,6.865,mat.oak);
+  box(x0,x1,2.34,2.36,3.46,6.865,mat.oak);
+  box(x0,x1,0,0.06,3.46,6.865,mat.plinth);
+  W(x0,x1,3.44,6.885,2.36,H);
+  const widths=[0.49,0.49,0.49,0.49,0.49,0.49,0.5025];let z=3.44;
+  const cols=[0x2d2a28,0xe8e2d8,0x7c8a96,0xb79e86,0x50413a,0xcfc6b8,0x8a9a83,0x3a4250];
+  widths.forEach((w,i)=>{
+    const za=z,zb=z+w; z=zb;
+    if(i<6){box(x0,x1,0.06,2.34,zb-0.01,zb,mat.oak);}
+    if(i<4){
+      const r=new THREE.Mesh(new THREE.CylinderGeometry(0.01,0.01,w-0.03,8),mat.steel);r.rotation.x=Math.PI/2;
+      const xm=(x0+x1)/2;r.position.set(xm,1.95,(za+zb)/2);scene.add(r);
+      for(let k=0;k<7;k++){const zz=za+0.04+k*0.062;const h=0.7+((k*37+i*11)%5)*0.12;box(xm-0.2,xm+0.2,1.93-h,1.93,zz,zz+0.025,M(cols[(k+i*3)%8]));}
+      box(x0+0.02,x1,2.05,2.07,za,zb,mat.oak);
+    }else if(i<6){
+      [0.4,0.75,1.1,1.45,1.8,2.1].forEach((y,k)=>{box(x0+0.02,x1,y,y+0.02,za,zb,mat.oak);
+        box((x0+x1)/2-0.15,(x0+x1)/2+0.15,y+0.02,y+0.12+(k%2)*0.04,za+0.06,zb-0.06,M(cols[(k*3+i)%8]));});
+    }
+    const xf=xFront, d=dir*0.02;
+    const fx0=Math.min(xf,xf+d),fx1=Math.max(xf,xf+d);
+    if(i===6){box(fx0,fx1,0.06,2.36,za+0.003,zb-0.003,mat.oak);return;}
+    box(fx0,fx1,0.06,2.36,za+0.003,za+0.028,mat.frame);box(fx0,fx1,0.06,2.36,zb-0.028,zb-0.003,mat.frame);
+    [0.06,1.03,2.335].forEach(y=>box(fx0,fx1,y,y+0.025,za+0.003,zb-0.003,mat.frame));
+    const gp=box(fx0+0.005,fx1-0.005,0.085,2.335,za+0.028,zb-0.028,mat.glassDoor);gp.castShadow=false;
+  });
+}
+wardrobe(1.09,1.71,1);
+wardrobe(5.22,4.61,-1);
+box(2.835,3.485,0,0.08,4.36,6.84,mat.plinth);
+box(2.785,3.535,0.08,0.86,4.31,6.89,mat.oak);
+[0.34,0.60].forEach(y=>{box(2.783,2.787,y,y+0.004,4.31,6.89,mat.plinth);box(3.533,3.537,y,y+0.004,4.31,6.89,mat.plinth);});
+box(2.82,3.50,0.86,0.875,4.34,6.86,mat.velvet);
+[[3.0,4.6],[3.2,4.9],[3.05,5.4],[3.3,5.8],[3.1,6.3]].forEach(([x,z])=>box(x,x+0.08,0.875,0.885,z,z+0.06,mat.steel));
+box(2.785,3.535,0.875,0.885,4.31,6.89,mat.oak).visible=false;
+const top=box(2.785,3.535,0.885,0.90,4.31,6.89,mat.glass);top.castShadow=false;
+box(2.79,3.53,0.03,0.04,4.33,6.87,mat.led);
+
+box(5.36,5.385,0,H,3.40,7.92,mat.oakWide);
+[4.25,5.10,5.95,6.90].forEach(z=>box(5.385,5.388,0.0,H,z-0.003,z+0.003,mat.plinth));
+box(5.386,5.40,1.02,1.40,6.92,6.94,mat.plinth);
+
+(function(){
+  const c=document.createElement('canvas');c.width=500;c.height=720;const g=c.getContext('2d');
+  g.fillStyle='#e9e1d3';g.fillRect(0,0,500,720);
+  const circ=(x,y,r,col)=>{g.fillStyle=col;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill();};
+  g.fillStyle='#b98a62';g.beginPath();g.ellipse(250,470,190,150,0,0,Math.PI*2);g.fill();
+  circ(330,230,110,'#3e3a36');circ(170,300,70,'#d8c3a3');
+  g.fillStyle='#8a5a3b';g.fillRect(60,560,380,24);
+  g.strokeStyle='#3e3a36';g.lineWidth=6;g.beginPath();g.moveTo(80,120);g.bezierCurveTo(200,60,300,180,430,100);g.stroke();
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
+  const art=new THREE.Mesh(new THREE.PlaneGeometry(1.25,1.80),new THREE.MeshStandardMaterial({map:t,roughness:.9}));
+  art.position.set(7.595,1.06+0.90,3.425);scene.add(art);
+  box(7.595-0.65,7.595+0.65,1.01,2.91,3.40,3.415,mat.led);
+  box(7.595-0.625,7.595+0.625,1.06,2.86,3.405,3.42,M(0x2d2a27));
+})();
+[[5.44,6.36],[8.83,9.75]].forEach(([a,b])=>{
+  box(a,b,0.37,0.76,3.40,3.92,mat.oak);
+  box(a+0.02,b-0.02,0.365,0.37,3.42,3.90,mat.led);
+  [0.25,0.32,0.39].forEach(o=>{const d=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.01,16),M(0x2b2a29));d.position.set(a+o+(a>7?0.3:0),0.765,3.55);scene.add(d);});
+});
+box(6.40,8.79,0,0.07,3.44,5.98,mat.plinth);
+box(6.36,8.83,0.07,0.37,3.40,6.02,mat.oak);
+box(6.38,8.81,0.06,0.07,3.42,6.0,mat.led);
+box(6.595,8.595,0.37,0.60,3.96,5.96,mat.linen);
+box(6.58,8.61,0.56,0.64,4.62,5.99,mat.duvet);
+box(6.58,8.61,0.62,0.645,4.62,4.85,mat.linen);
+[[6.70,7.55],[7.64,8.49]].forEach(([a,b])=>box(a,b,0.60,0.74,4.0,4.42,mat.white));
+box(9.80,9.98,0,H-0.05,3.47,3.95,mat.curtain);
+box(9.80,9.98,0,H-0.05,7.40,7.85,mat.curtain);
+
+const ledLights=[[7.6,0.06,4.7,2.6],[5.9,0.30,3.66,1.4],[9.29,0.30,3.66,1.4],[7.6,1.95,3.75,2.8],[3.16,0.05,5.6,2.0],[2.67,0.95,0.25,1.8],[0.48,0.05,4.85,1.6],[1.95,2.2,5.15,2.6],[4.35,2.2,5.15,2.6]].map(([x,y,z,d])=>{const l=new THREE.PointLight(0xffc77a,0,d,2);l.position.set(x,y,z);scene.add(l);return l;});
+let ledsOn=false;
+function setLeds(on){
+  ledsOn=on;
+  mat.led.emissiveIntensity=on?2.6:0; mat.led.color.set(on?0xfff2d2:0xe9e4dc);
+  ledLights.forEach(l=>l.intensity=on?1.1:0);
+  hemi.intensity=on?0.16:0.62; sun.intensity=on?0.06:0.8; fill.intensity=on?0.04:0.3;
+  const b=document.getElementById('leds');b.setAttribute('aria-pressed',String(on));b.textContent=on?'Ledlijnen uit':'Ledlijnen aan';
+}
+document.getElementById('leds').addEventListener('click',()=>setLeds(!ledsOn));
+let low=true;
+function setWalls(isLow){
+  low=isLow; const s=isLow?0.42:1;
+  walls.children.forEach(m=>{m.scale.y=s; if(m.position.y>1)m.visible=!isLow;});
+  scene.children.forEach(m=>{if(m.material===mat.glass||m.material===mat.winFrame||m.material===mat.mirror||m.material===mat.curtain)m.visible=!isLow;});
+  const b=document.getElementById('walls'); b.setAttribute('aria-pressed',String(isLow)); b.textContent=isLow?'Muren laag':'Muren volledig';
+}
+
+const views={
+  'v-over':{p:[10.2,8.6,12.2],t:[4.9,0.3,4.0],low:true},
+  'v-bed':{p:[7.6,1.6,7.6],t:[7.6,1.15,3.4],low:false},
+  'v-dress':{p:[2.25,1.6,7.75],t:[3.05,1.2,2.6],low:false},
+  'v-bath':{p:[2.65,1.6,2.85],t:[2.65,1.3,0.0],low:false},
+  'v-tub':{p:[0.6,1.6,2.2],t:[5.2,0.9,1.3],low:false},
+  'v-shower':{p:[0.55,1.65,0.85],t:[0.45,1.1,4.6],low:false}
+};
+let anim=null;
+function go(id,instant){
+  const v=views[id]; setWalls(v.low);
+  document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed',String(b.id===id)));
+  const p1=new THREE.Vector3(...v.p), t1=new THREE.Vector3(...v.t);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(instant||reduce){camera.position.copy(p1);controls.target.copy(t1);controls.update();return;}
+  anim={p0:camera.position.clone(),t0:controls.target.clone(),p1,t1,s:performance.now()};
+}
+Object.keys(views).forEach(id=>document.getElementById(id).addEventListener('click',()=>go(id)));
+document.getElementById('walls').addEventListener('click',()=>setWalls(!low));
+
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage); resize();
+go('v-over',true);
+
+function loop(now){
+  if(anim){const k=Math.min(1,(now-anim.s)/900),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    camera.position.lerpVectors(anim.p0,anim.p1,e);controls.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1)anim=null;}
+  controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>
