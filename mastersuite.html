@@ -75,6 +75,7 @@ li{display:flex;gap:10px;align-items:baseline}
     <div class="card">
       <h2>Dressing en badkamer</h2>
       <ul>
+        <li><span class="sw" style="background:#f3e9d6;border:1px solid var(--line)"></span>Hanglamp Amagumo (Time &amp; Style) boven het eiland<span class="k">washi en ceder</span></li>
         <li><span class="sw" style="background:#e6e2da;border:1px solid var(--line)"></span>Jaloezie in raam R0.13, lamellen 25 mm<span class="k">127 breed</span></li>
         <li><span class="sw" style="background:#8f8578"></span>2 kastwanden met glazen kaderdeuren, indeling volgens doorsnede<span class="k">h 326</span></li>
         <li><span class="sw" style="background:#d9c6aa"></span>Eiland met glazen blad<span class="k">260 × 75</span></li>
@@ -231,7 +232,7 @@ box(3.43,5.88,0,H,4.10,4.12,mat.oakWide,walls);box(6.875,6.95,0,H,4.10,4.12,mat.
 [4.40,5.30].forEach(x=>box(x-0.003,x+0.003,0,H,4.098,4.10,mat.plinth));
 
 W(3.016,3.413,3.9,5.435,0,H,mat.stone); round(3.215,5.435,0.198,mat.stone);
-round(3.215,7.105,0.198,mat.stone); W(3.016,3.413,7.105,8.45,0,H,mat.stone);
+round(3.215,7.105,0.198,mat.stone); W(3.016,3.413,7.105,8.252,0,H,mat.stone); round(3.215,8.252,0.198,mat.stone); W(3.215,3.413,8.252,8.45,0,H,mat.stone);
 W(3.413,6.875,8.34,8.45,0,H,mat.stone);
 
 W(-0.3,0,3.8,9.8,0,H,mat.stone);
@@ -481,6 +482,22 @@ box(4.62,6.01,0.56,0.64,1.105,3.135,mat.duvet);
 box(4.62,4.85,0.62,0.645,1.105,3.135,mat.linen);
 [[1.22,2.07],[2.17,3.02]].forEach(([a,b])=>box(4.02,4.44,0.60,0.74,a,b,mat.white));
 
+const amagumo=(function(){
+  const washi=new THREE.MeshStandardMaterial({color:0xe2cba6,emissive:0xf5b56a,emissiveIntensity:0.08,roughness:.9,transparent:true,opacity:.96});
+  const cedar=M(0xb07f55,{roughness:.7});
+  const cx=5.455,cz=6.266,g=new THREE.Group();const piv=new THREE.Group();piv.position.set(cx,0,cz);piv.rotation.y=Math.PI/2;scene.add(piv);piv.add(g);g.position.set(-cx,0,-cz);
+  const boxes=[[0.24,0.12,0.54,-0.06,2.35,-0.73],[0.24,0.12,0.90,-0.10,2.41,-0.01],[0.24,0.13,0.95,0.08,2.336,0.11],[0.24,0.13,0.44,-0.02,2.274,0.78],[0.24,0.13,0.91,0.10,2.212,-0.36],[0.24,0.13,0.89,-0.08,2.15,0.09]];
+  boxes.forEach(([w,h,d,ox,y,oz])=>{const x0=cx+ox-w/2,z0=cz+oz-d/2,t=0.012;
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w-0.004,h-0.004,d-0.004),washi);m.position.set(cx+ox,y+h/2,cz+oz);g.add(m);
+    [[0,0],[0,1],[1,0],[1,1]].forEach(([a,b])=>{
+      box(x0+a*(w-t),x0+a*(w-t)+t,y,y+h,z0+b*(d-t),z0+b*(d-t)+t,cedar,g);
+      box(x0,x0+w,y+a*(h-t),y+a*(h-t)+t,z0+b*(d-t),z0+b*(d-t)+t,cedar,g);
+      box(x0+a*(w-t),x0+a*(w-t)+t,y+b*(h-t),y+b*(h-t)+t,z0,z0+d,cedar,g);});
+    if(d>0.8)[0,1].forEach(a=>box(x0+a*(w-t),x0+a*(w-t)+t,y,y+h,cz+oz-t/2,cz+oz+t/2,cedar,g));});
+  [[-0.26,-0.06],[0,-0.10],[0.22,0.08]].forEach(([oz,ox])=>box(cx+ox-0.0015,cx+ox+0.0015,2.50,H,cz+oz,cz+oz+0.003,M(0x2a2826),g));
+  const l=new THREE.PointLight(0xffcf8a,0,5.5,2);l.position.set(cx,2.25,cz);scene.add(l);
+  return {set(on){washi.emissiveIntensity=on?0.65:0.06;l.intensity=on?1.8:0;}};
+})();
 const ledLights=[[4.7,0.06,2.12,2.6],[3.69,0.30,0.61,1.4],[3.69,0.30,3.63,1.4],[3.6,1.95,2.12,2.8],[5.45,0.05,6.27,2.0],[0.25,0.95,6.66,1.8],[4.0,0.05,9.45,1.6],[5.15,2.2,5.3,2.6],[5.15,2.2,7.25,2.6]].map(([x,y,z,d])=>{const l=new THREE.PointLight(0xffc77a,0,d,2);l.position.set(x,y,z);scene.add(l);return l;});
 let doorsOpen=false,doorT=0,doorTarget=0;
 document.getElementById('doors').addEventListener('click',()=>{doorsOpen=!doorsOpen;doorTarget=doorsOpen?1:0;
@@ -499,7 +516,7 @@ const cT=new THREE.CatmullRomCurve3(KF.map(k=>new THREE.Vector3(...k[1])),false,
 const TOUR_MS=60000;const tour={on:false,t0:0};
 function setTourBtn(){const b=document.getElementById('tour');b.setAttribute('aria-pressed',String(tour.on));b.textContent=tour.on?'Rondleiding stoppen':'Rondleiding';}
 function startTour(){tour.on=true;tour.t0=performance.now();anim=null;setWalls(false);
-  if(!doorsOpen)document.getElementById('doors').click();
+  if(doorsOpen)document.getElementById('doors').click();
   document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed','false'));setTourBtn();}
 function stopTour(){tour.on=false;if(water.on){water.set(false);const b=document.getElementById('shower');b.setAttribute('aria-pressed','false');b.textContent='Douche aan';}setTourBtn();}
 document.getElementById('tour').addEventListener('click',()=>tour.on?stopTour():startTour());
@@ -507,13 +524,14 @@ controls.addEventListener('start',()=>{if(tour.on)stopTour();});
 function tourStep(now){if(!tour.on)return;const u=(now-tour.t0)/TOUR_MS;if(u>=1){stopTour();return;}
   const e=u<.03?u*u/(.06):u;camera.position.copy(cP.getPoint(Math.min(1,e)));controls.target.copy(cT.getPoint(Math.min(1,e)));
   const idx=e*(KF.length-1),want=idx>7.6&&idx<10.2;
+  if(idx>1.6&&!doorsOpen)document.getElementById('doors').click();
   if(want!==water.on){water.set(want);const b=document.getElementById('shower');b.setAttribute('aria-pressed',String(want));b.textContent=want?'Douche uit':'Douche aan';}}
 
 let ledsOn=false;
 function setLeds(on){
   ledsOn=on;
   mat.led.emissiveIntensity=on?2.6:0; mat.led.color.set(on?0xfff2d2:0xe9e4dc);
-  ledLights.forEach(l=>l.intensity=on?1.1:0);
+  ledLights.forEach(l=>l.intensity=on?1.1:0);amagumo.set(on);
   hemi.intensity=on?0.16:0.62; sun.intensity=on?0.06:0.8; fill.intensity=on?0.04:0.3;
   const b=document.getElementById('leds');b.setAttribute('aria-pressed',String(on));b.textContent=on?'Ledlijnen uit':'Ledlijnen aan';
 }
@@ -531,7 +549,7 @@ const views={
   'v-bed':{p:[7.7,1.6,2.12],t:[3.43,1.15,2.12],low:false},
   'v-corner':{p:[4.6,1.6,3.7],t:[8.1,1.2,0.1],low:false},
   'v-makeup':{p:[6.38,1.45,1.3],t:[6.38,1.2,4.5],low:false},
-  'v-dress':{p:[7.6,1.6,6.27],t:[3.0,1.2,6.27],low:false},
+  'v-dress':{p:[7.5,1.45,5.3],t:[4.6,1.9,6.4],low:false},
   'v-bath':{p:[2.75,1.6,6.66],t:[0,1.3,6.66],low:false},
   'v-tub':{p:[1.6,1.6,8.0],t:[1.8,0.8,4.0],low:false},
   'v-shower':{p:[2.2,1.5,9.2],t:[5.1,1.25,8.75],low:false}
