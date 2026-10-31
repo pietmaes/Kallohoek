@@ -36,6 +36,8 @@ li{display:flex;gap:10px;align-items:baseline}
 .note{color:var(--muted);font-size:13.5px;margin:0}
 .note + .note{margin-top:8px}
 @media (max-width:520px){.hint{display:none}}
+#stage:fullscreen{height:100%;border-radius:0;border:0}
+#stage.max{position:fixed;inset:0;z-index:50;height:100%;border-radius:0;border:0;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 </style>
 
 <div class="wrap">
@@ -58,7 +60,7 @@ li{display:flex;gap:10px;align-items:baseline}
 
   <div id="stage">
     <span class="hint">Slepen om te draaien · scrollen of knijpen om te zoomen</span>
-    <div class="tools">
+    <div class="tools"><button id="fs" aria-pressed="false">Volledig scherm</button>
       <button id="tour" aria-pressed="false">Rondleiding</button>
       <button id="doors" aria-pressed="false">Kast openen</button>
       <button id="floor0" aria-pressed="false">Gelijkvloers tonen</button>
@@ -542,6 +544,19 @@ function loop(now){
   controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function(){const st=document.getElementById('stage'),b=document.getElementById('fs');
+  const isFs=()=>document.fullscreenElement===st||st.classList.contains('max');
+  const lbl=()=>{const on=isFs();b.setAttribute('aria-pressed',String(on));b.textContent=on?'Volledig scherm sluiten':'Volledig scherm';};
+  b.addEventListener('click',()=>{
+    if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});return;}
+    if(st.classList.contains('max')){st.classList.remove('max');lbl();return;}
+    const go=st.requestFullscreen?st.requestFullscreen():Promise.reject();
+    Promise.resolve(go).catch(()=>{st.classList.add('max');lbl();});});
+  document.addEventListener('fullscreenchange',lbl);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&st.classList.contains('max')){st.classList.remove('max');lbl();}});
 })();
 </script>
 
