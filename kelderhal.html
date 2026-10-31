@@ -68,12 +68,16 @@ li{display:flex;gap:10px;align-items:baseline}
 
   <div class="grid">
     <div class="card">
-      <h2>Meubilair (detailplan 1/20)</h2>
+      <h2>Meubilair (detailplannen 1/20)</h2>
       <ul>
-        <li><span class="sw" style="background:#46322a"></span>Wandkast, 6 deuren, donkere eik<span class="k">404 × 44, h 262</span></li>
-        <li><span class="sw" style="background:#0d0b0a"></span>Uitgefreesde grepen, verticaal<span class="k">42 cm</span></li>
+        <li><span class="sw" style="background:#543d31"></span>Vestiaire +0, 3 deuren, eikfineer<span class="k">3 × 78, h 277</span></li>
+        <li><span class="sw" style="background:#e8e4df;border:1px solid var(--line)"></span>2× korte jassen met lades en tassenzone, 1× lange jassen<span class="k">6 lades, 3 roedes</span></li>
+        <li><span class="sw" style="background:#fff3df;border:1px solid var(--line)"></span>Verticale ledstrips op deurcontact<span class="k">4 × 195, 2 × 274</span></li>
+        <li><span class="sw" style="background:#543d31"></span>Deurpaneel naar bureauhal, met wandbekleding<span class="k">116 breed</span></li>
+        <li><span class="sw" style="background:#543d31"></span>Wandkast kelder, 6 deuren, eikfineer<span class="k">404 × 44, h 262</span></li>
         <li><span class="sw" style="background:#e8e4df;border:1px solid var(--line)"></span>2 vakken kastroede, 1 vak leggers<span class="k">3 × 133,4</span></li>
-        <li><span class="sw" style="background:#46322a"></span>Wijnwand met wandbekleding<span class="k">230 breed</span></li>
+        <li><span class="sw" style="background:#0d0b0a"></span>Ingefreesde grepen aan de deurnaad, vloer tot 100 cm<span class="k">beide kasten</span></li>
+        <li><span class="sw" style="background:#543d31"></span>Wijnwand met wandbekleding<span class="k">230 breed</span></li>
         <li><span class="sw" style="background:#f2c46b"></span>4 leggers met ledlijn onderaan, ± 25 flessen elk<span class="k">± 100 flessen</span></li>
       </ul>
     </div>
@@ -82,7 +86,6 @@ li{display:flex;gap:10px;align-items:baseline}
       <ul>
         <li><span class="sw" style="background:#8e8a84"></span>Vloer Pierre de Varennes donsato, wildverband<span class="k">kelder en +0</span></li>
         <li><span class="sw" style="background:#fff3df;border:1px solid var(--line)"></span>Luster Bocci 141.19, 19 glazen bollen aan zwarte kabel<span class="k">trapgat +0 tot +1</span></li>
-        <li><span class="sw" style="background:#57433a"></span>Vestiaire +0: 2× korte jassen met lades/tassen, 1× lange jassen, ledstrips; deurpaneel naar bureauhal<span class="k">3 × 78, h 277</span></li>
         <li><span class="sw" style="background:#57433a"></span>Ronde houten handgreep in uitgefreesde wandsleuf met ledlijn<span class="k">wandzijde</span></li>
         <li><span class="sw" style="background:#1e1f20"></span>Zwarte metalen buisleuning Ø 25 mm, één doorlopend geplooide buis, ook rond trapgat<span class="k">h 92–100</span></li>
         <li><span class="sw" style="background:#46322a"></span>Zwevende trap en wandbekleding, donkere eik<span class="k">120 breed</span></li>
@@ -169,7 +172,7 @@ box(1.55,1.59,0,2.10,6.21,7.10,mat.door);
 box(1.59,1.62,1.0,1.03,6.95,7.07,mat.rod);
 
 box(0,1.50,0.001,0.02,1.94,3.45,mat.steel);
-box(0.30,0.72,0,2.05,1.925,1.945,mat.steel); box(0.73,1.15,0,2.05,1.925,1.945,mat.steel);
+const liftB=[box(0.30,0.72,0,2.05,1.925,1.945,mat.steel),box(0.73,1.15,0,2.05,1.925,1.945,mat.steel)];
 box(0.30,1.15,2.05,2.10,1.92,1.95,mat.groove);
 box(1.20,1.27,1.05,1.17,1.775,1.80,mat.btn);
 box(0.06,0.40,0,2.0,3.62,3.98,mat.rack); [0.4,0.8,1.2,1.6].forEach(y=>box(0.04,0.42,y,y+0.03,3.62,5.95,mat.rack));
@@ -241,7 +244,7 @@ mat.bronze=M(0x8c6a4b,{metalness:.65,roughness:.4});
 mat.floor0=M(0xd9d4cb,{roughness:.55});
 mat.glass=new THREE.MeshStandardMaterial({color:0xb8d3e3,transparent:true,opacity:.2,roughness:.05,metalness:.1});
 mat.frame=M(0x2f2d2b,{roughness:.5});
-[[-0.9,4.36,0,1.94],[-0.9,1.64,1.94,3.59],[2.84,4.36,1.94,8.55],[1.665,2.84,5.3,8.55]].forEach(([a,b,c,d])=>{U(a,b,-0.43,-0.02,c,d,mat.wall);U(a,b,-0.02,0,c,d,mat.floor0);});
+[[-0.9,4.36,0,1.94],[-0.9,0,1.94,3.59],[1.50,1.64,1.94,3.59],[2.84,4.36,1.94,8.55],[1.665,2.84,5.3,8.55]].forEach(([a,b,c,d])=>{U(a,b,-0.43,-0.02,c,d,mat.wall);U(a,b,-0.02,0,c,d,mat.floor0);});
 UW(-0.9,0.013,-0.2,0.63);UW(1.173,1.473,-0.2,0.63);UW(1.473,3.813,-0.2,0);UW(3.813,4.36,-0.2,0.63);
 UW(-1.1,-0.9,-0.2,1.94);UW(-1.1,0,1.94,2.08);
 UW(4.36,4.56,-0.2,0.65);
@@ -271,13 +274,12 @@ UW(1.50,1.64,1.68,8.55);
   piece(G,TOP,1.68,8.55,upperWalls);})();
 UW(-0.19,0,1.94,3.59);UW(0,1.50,3.45,3.59);
 box(0,0.30,G,G+HG,1.80,1.94,mat.cladding,upperWalls);box(1.15,1.50,G,G+HG,1.80,1.94,mat.cladding,upperWalls);box(0.30,1.15,G+2.05,G+HG,1.80,1.94,mat.cladding,upperWalls);
-U(0.30,0.72,0,2.05,1.785,1.805,mat.steel);U(0.73,1.15,0,2.05,1.785,1.805,mat.steel);
+const liftU=[U(0.30,0.72,0,2.05,1.785,1.805,mat.steel),U(0.73,1.15,0,2.05,1.785,1.805,mat.steel)];
 U(0.30,1.15,2.05,2.10,1.78,1.81,mat.groove);
 U(1.20,1.27,1.05,1.17,1.775,1.80,mat.btn);
 U(-0.9,0.013,0,HG,0.63,0.65,mat.cladding);
 (function(){const piv=new THREE.Group();piv.position.set(1.173,G,0.65);upper.add(piv);
   box(-1.159,-0.001,0,HG-0.004,-0.02,0,mat.oak,piv);box(-1.11,-1.088,0.98,1.40,-0.027,-0.019,mat.handle,piv);box(-1.11,-1.088,0.98,1.40,-0.001,0.007,mat.handle,piv);
-  piv.userData.dir=1;leaves.push(piv);
   U(0.013,1.173,-0.02,0,-1.6,0.63,mat.floor0);UW(-0.9,0.013,-1.6,-0.2);UW(1.173,1.4,-1.6,-0.2);UW(0.013,1.173,-1.8,-1.6);})();
 U(1.173,1.473,0,HG,0.63,0.65,mat.cladding);
 U(3.813,4.113,0,HG,0.63,0.65,mat.cladding);
@@ -492,12 +494,22 @@ function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSiz
 new ResizeObserver(resize).observe(stage); resize();
 go('v-over0',true);
 
+const car=new THREE.Group();scene.add(car);
+(function(){const cw=M(0xcfd2d3,{metalness:.4,roughness:.4});
+  box(0.02,1.48,-0.04,0,1.96,3.43,M(0x8d8f90,{roughness:.5}),car);
+  box(0.02,0.05,0,2.25,1.96,3.43,cw,car);box(1.45,1.48,0,2.25,1.96,3.43,cw,car);box(0.02,1.48,0,2.25,3.40,3.43,cw,car);
+  box(0.02,1.48,2.25,2.28,1.96,3.43,cw,car);box(0.3,1.2,2.24,2.25,2.3,3.1,new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xfff3dd,emissiveIntensity:1}),car);
+  box(1.44,1.45,0.9,1.0,2.6,2.75,mat.btn,car);
+  car.position.y=G;})();
+function setLift(arr,f){arr[0].position.x=0.30-0.40*f;arr[1].position.x=0.73+0.40*f;}
 const KF=[
  [[3.95,4.95,7.7],[2.0,4.65,3.0]],[[3.9,4.85,7.3],[2.2,7.2,4.3]],[[3.6,4.95,4.6],[2.64,4.6,0.3]],
  [[3.45,4.95,3.3],[2.64,4.3,0.3]],[[3.5,4.95,1.6],[2.24,3.9,4.3]],[[2.24,4.95,1.45],[2.24,3.4,4.5]],
  [[2.24,4.15,3.0],[2.24,2.0,6.2]],[[2.24,2.94,4.6],[2.5,1.3,7.4]],[[2.4,1.75,6.35],[2.9,1.1,7.6]],
  [[3.4,1.6,6.0],[2.7,1.05,7.6]],[[3.45,1.6,4.6],[3.2,1.3,1.0]],[[3.45,1.6,2.4],[2.0,1.25,0.2]],
- [[2.4,1.6,1.15],[0.7,1.1,1.93]],[[3.0,1.7,1.0],[2.4,1.2,5.5]]];
+ [[2.0,1.6,1.05],[0.72,1.3,1.93]],[[0.75,1.6,1.15],[0.72,1.4,2.6]],[[0.73,1.6,1.25],[0.72,1.4,2.7]],
+ [[0.75,1.6,2.45],[1.6,1.4,2.7]],[[0.72,1.6,2.8],[0.72,1.4,0.5]],[[0.72,1.6,2.82],[0.72,1.4,0.45]],
+ [[0.72,G+1.6,2.82],[0.72,G+1.4,0.45]],[[0.72,G+1.6,2.8],[0.72,G+1.4,0.4]],[[0.9,G+1.6,1.25],[2.4,G+1.4,2.4]],[[1.9,G+1.6,1.3],[2.9,G+1.45,4.8]],[[2.35,G+1.6,2.1],[2.6,G+1.5,7.6]]];
 const segW=(function(){const w=[];for(let i=0;i<KF.length-1;i++){const p0=new THREE.Vector3(...KF[i][0]),p1=new THREE.Vector3(...KF[i+1][0]);
   const d0=new THREE.Vector3(...KF[i][1]).sub(p0).normalize(),d1=new THREE.Vector3(...KF[i+1][1]).sub(p1).normalize();
   w.push(p0.distanceTo(p1)+1.2*d0.angleTo(d1)+0.3);}const tot=w.reduce((a,b)=>a+b,0);let c=0;return w.map(v=>(c+=v)/tot);})();
@@ -505,18 +517,22 @@ function tourParam(u){let i=0;while(i<segW.length-1&&u>segW[i])i++;const a=i?seg
   const e=f*f*(3-2*f)*0.35+f*0.65;return (i+e)/(KF.length-1);}
 const cP=new THREE.CatmullRomCurve3(KF.map(k=>new THREE.Vector3(...k[0])),false,'centripetal');
 const cT=new THREE.CatmullRomCurve3(KF.map(k=>new THREE.Vector3(...k[1])),false,'centripetal');
-const TOUR_MS=30000;const tour={on:false,t0:0};
+const TOUR_MS=44000;const tour={on:false,t0:0};
 function setTourBtn(){const b=document.getElementById('tour');b.setAttribute('aria-pressed',String(tour.on));b.textContent=tour.on?'Rondleiding stoppen':'Rondleiding';}
 function setDoors(open){if(open!==doorsOpen)document.getElementById('doors').click();}
-function startTour(){tour.on=true;tour.t0=performance.now();anim=null;setWalls(false);setUpper(true);setDoors(false);
+function startTour(){car.position.y=G;setLift(liftB,0);setLift(liftU,0);tour.on=true;tour.t0=performance.now();anim=null;setWalls(false);setUpper(true);setDoors(false);
   document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed','false'));setTourBtn();}
-function stopTour(){tour.on=false;setTourBtn();}
+function stopTour(){tour.on=false;setLift(liftB,0);setLift(liftU,0);car.position.y=G;setTourBtn();}
 document.getElementById('tour').addEventListener('click',()=>tour.on?stopTour():startTour());
 controls.addEventListener('start',()=>{if(tour.on)stopTour();});
 document.querySelectorAll('.views button').forEach(b=>b.addEventListener('click',()=>{if(tour.on)stopTour();},true));
 function tourStep(now){if(!tour.on)return;const u=Math.max(0,(now-tour.t0)/TOUR_MS);if(u>=1){setDoors(false);stopTour();return;}
   const t=tourParam(u);camera.position.copy(cP.getPoint(t));controls.target.copy(cT.getPoint(t));
-  const idx=t*(KF.length-1);setDoors((idx>1.5&&idx<3.05)||(idx>10.75&&idx<11.35));}
+  const idx=t*(KF.length-1);setDoors((idx>1.5&&idx<3.05)||(idx>10.75&&idx<11.35));
+  const ramp=(a,b)=>Math.max(0,Math.min(1,(idx-a)/(b-a)));
+  setLift(liftB,Math.min(ramp(12.5,13.2),1-ramp(16.2,16.9)));
+  car.position.y=idx<17?0:idx>18?G:G*ramp(17,18);
+  setLift(liftU,Math.min(ramp(18.2,18.9),1-ramp(19.6,20)));}
 function loop(now){
   if(anim){const k=Math.min(1,(now-anim.s)/900),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
     camera.position.lerpVectors(anim.p0,anim.p1,e);controls.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1)anim=null;}
