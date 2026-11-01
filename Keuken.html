@@ -95,7 +95,7 @@ li{display:flex;gap:10px;align-items:baseline}
         <li><span class="sw" style="background:#f1f2f1;border:1px solid var(--line)"></span>Koelcel achter de kastenwand, dubbele deur over de volle breedte van de pantry; open legkast haaks in de doorgang, 35 × 85 (5 legplanken met ledlijn), pocket voor de deuren van de wijnkolom ernaast<span class="k">136 × 170</span></li>
         <li><span class="sw" style="background:#2a2826"></span>Buitenkeuken onder overdekt terras: kasten en lades (openen mee), deur naar de garage, brandende buitenhaard (Metalfire) met houtopslag eronder, werkblad, Big Green Egg Large Onyx (ingebouwd)<span class="k">769 breed</span></li>
         <li><span class="sw" style="background:#fff7ea;border:1px solid var(--line)"></span>Flos Luce Orizzontale boven de eettafel<span class="k">± 210</span></li>
-        <li><span class="sw" style="background:#8f8a83"></span>Eettafel in Silver River marmer (gezoet), afgeronde vorm op 3 kolompoten, 10 stoelen met lederen zit<span class="k">360 × 100</span></li>
+        <li><span class="sw" style="background:#b9b3a8"></span>Eettafel in grijsbruine mortex, afgeronde vorm op 3 kolompoten, 10 stoelen met lederen zit<span class="k">360 × 100</span></li>
       </ul>
     </div>
     <div class="card">
@@ -370,28 +370,12 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
     const r=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,0.012,16),cap);r.position.set(x,H-0.006,z);scene.add(r);});
   [3.9,5.1].forEach(x=>{const l=new THREE.PointLight(0xffe2b0,0.55,3,2);l.position.set(x,y-0.1,z);scene.add(l);});})();
 /* ---- eettafel ---- */
-(function(){const tw=(function(){const c=document.createElement('canvas');c.width=2048;c.height=1024;const g=c.getContext('2d');
-    let seed=77;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
-    g.fillStyle='#7f7d7a';g.fillRect(0,0,2048,1024);
-    for(let i=0;i<420;i++){const x=rnd()*2048,y=rnd()*1024,r=30+rnd()*160;const gr=g.createRadialGradient(x,y,0,x,y,r);const q=rnd();const col=q<.45?'96,94,92':q<.85?'150,148,145':'128,112,96';
-      gr.addColorStop(0,`rgba(${col},.28)`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.fillRect(x-r,y-r,2*r,2*r);}
-    const vein=(x,y,dx,dy,n,w,col,a,wob)=>{g.strokeStyle=`rgba(${col},${a})`;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(x,y);
-      for(let i=0;i<n;i++){dx+=(rnd()-.5)*wob;dy+=(rnd()-.5)*wob;const l=Math.hypot(dx,dy);dx/=l;dy/=l;x+=dx*14;y+=dy*14;g.lineTo(x,y);}g.stroke();};
-    /* roestbruine wolkige aders */
-    g.filter='blur(6px)';
-    for(let i=0;i<18;i++)vein(rnd()*2048,rnd()*1024,rnd()-.5,1,40+rnd()*50,10+rnd()*20,rnd()<.6?'138,104,72':'112,90,70',.14+rnd()*.12,.5);
-    for(let i=0;i<10;i++)vein(rnd()*2048,rnd()*1024,1,(rnd()-.5)*.4,60+rnd()*60,8+rnd()*14,'120,100,80',.12,.35);
-    g.filter='none';
-    /* fijne witte aders, overwegend horizontaal */
-    for(let i=0;i<26;i++){const x=rnd()*2048,y=rnd()*1024,dx=1,dy=(rnd()-.5)*.35,n=40+rnd()*110;
-      g.filter='blur(2px)';vein(x,y,dx,dy,n,3+rnd()*3,'210,208,204',.22,.25);seed+=3;}
-    g.filter='none';
-    for(let i=0;i<22;i++)vein(rnd()*2048,rnd()*1024,1,(rnd()-.5)*.4,30+rnd()*120,0.6+rnd()*1.0,'225,223,219',.3+rnd()*.3,.3);
-    /* donkere breuklijnen */
-    for(let i=0;i<4;i++)vein(rnd()*2048,0,(rnd()-.5)*.3,1,80,1.2+rnd()*1.2,'52,44,38',.75,.45);
-    for(let i=0;i<5;i++)vein(rnd()*2048,rnd()*1024,1,(rnd()-.5)*.6,25+rnd()*40,0.8,'60,52,46',.55,.5);
-    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.MirroredRepeatWrapping;t.repeat.set(0.28,0.56);t.anisotropy=8;
-    return new THREE.MeshStandardMaterial({map:t,roughness:.32,metalness:0});})();
+(function(){const tw=(function(){const c=document.createElement('canvas');c.width=1024;c.height=1024;const g=c.getContext('2d');
+    g.fillStyle='#c4c1b6';g.fillRect(0,0,1024,1024);let seed=41;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+    for(let i=0;i<220;i++){const x=rnd()*1024,y=rnd()*1024,r=40+rnd()*180;const gr=g.createRadialGradient(x,y,0,x,y,r);const col=rnd()<.5?'150,146,136':'214,212,204';
+      gr.addColorStop(0,`rgba(${col},.07)`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.fillRect(x-r,y-r,2*r,2*r);}
+    for(let i=0;i<120;i++){g.strokeStyle=`rgba(${rnd()<.5?'146,142,132':'216,214,206'},${0.015+rnd()*0.025})`;g.lineWidth=10+rnd()*30;g.beginPath();const x=rnd()*1024,y=rnd()*1024;g.arc(x,y,60+rnd()*160,rnd()*6,rnd()*6+1.2);g.stroke();}
+    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;return new THREE.MeshStandardMaterial({map:t,color:0xf2f2ee,roughness:.75});})();
   const cx=4.5,cz=6.9,L=3.6,Wd=1.1,r=Wd/2;
   const sh=new THREE.Shape();sh.moveTo(-L/2+r,-Wd/2);sh.lineTo(L/2-r,-Wd/2);sh.absarc(L/2-r,0,r,-Math.PI/2,Math.PI/2,false);sh.lineTo(-L/2+r,Wd/2);sh.absarc(-L/2+r,0,r,Math.PI/2,Math.PI*1.5,false);
   const tg=new THREE.ExtrudeGeometry(sh,{depth:0.07,bevelEnabled:true,bevelThickness:0.01,bevelSize:0.012,bevelSegments:2,curveSegments:32});tg.rotateX(-Math.PI/2);
@@ -406,7 +390,7 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
     box(-0.16,0.16,0.62,0.74,0.20,0.23,wd,g);
     [[-0.21,0.19],[0.21,0.19],[-0.23,0.0],[0.23,0.0]].forEach(([px,pz])=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.014,0.27,8),wd);p.position.set(px,0.585,pz);g.add(p);});};
   [3.3,4.1,4.9,5.7].forEach(x=>{chair(x,6.15,-1);chair(x,7.65,1);});chair(2.40,6.9,'w');chair(6.60,6.9,'e');
-  const rug=box(2.2,6.8,0,0.01,5.5,8.3,M(0xc8bfb0,{roughness:1}));rug.receiveShadow=true;})();
+})();
 
 /* ---- pantry ---- */
 (function(){box(6.50,7.85,0,0.85,-2.37,-1.77,mat.oakLight);box(6.50,7.85,0.85,0.91,-2.37,-1.77,mat.marble);
