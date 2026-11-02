@@ -96,7 +96,9 @@ li{display:flex;gap:10px;align-items:baseline}
         <li><span class="sw" style="background:#a6a29c"></span>Pantry-aanrecht (199 breed, tot tegen de muurkop aan het sas): werkblad geborstelde inox met ingelaste Blanco CLARON 340-U, Fantini Nostromo 42021852F (geborsteld inox, uittrekbaar), rugwand Silver River<span class="k">135</span></li>
         <li><span class="sw" style="background:#543d31"></span>Pantry met doorloop naar sas en kastenwand bijkeuken; geïsoleerde deur d0.09 met slot naar garage<span class="k">216 + 175</span></li>
         <li><span class="sw" style="background:#f1f2f1;border:1px solid var(--line)"></span>Koelcel achter de kastenwand, deur van 85 cm naast het aanrecht (draait naar de doorgang); open legkast haaks in de doorgang, 35 × 85 (5 legplanken met ledlijn), pocket voor de deuren van de wijnkolom ernaast<span class="k">136 × 170</span></li>
-        <li><span class="sw" style="background:#2a2826"></span>Overdekt terras 432 breed (incl. kastenwand), extensief groen (Hakonechloa macra) ernaast, tuin met bomen aan oost- en westzijde, vijver (196,5 breed) langs de westgevel met een dwarse stapplaat, stapstenen lopen door in de tuin. Buitenkeuken: kasten en lades (openen mee), deur naar de garage, brandende buitenhaard (Metalfire) met houtopslag eronder, werkblad, Big Green Egg Large Onyx (ingebouwd), inox achterwand; schuifpaneel van 303 cm voor de keuken (schuift open met de knop Schuifdeuren)<span class="k">769 breed</span></li>
+        <li><span class="sw" style="background:#2a2826"></span>Overdekt terras 432 breed (incl. kastenwand), loopt 195 breed door langs het raam tot het einde, met 2 buitengrondspots TAL Micro Ubo; extensief groen (Hakonechloa macra) ernaast, tuin met bomen aan oost- en westzijde, vijver (196,5 breed) langs de westgevel met een dwarse stapplaat, stapstenen lopen door in de tuin. Buitenkeuken: kasten en lades (openen mee), deur naar de garage, brandende buitenhaard (Metalfire) met houtopslag eronder, werkblad, Big Green Egg Large Onyx (ingebouwd), inox achterwand; schuifpaneel van 303 cm voor de keuken (schuift open met de knop Schuifdeuren)<span class="k">769 breed</span></li>
+        <li><span class="sw" style="background:#f3f2ef;border:1px solid var(--line)"></span>2 + 2 plafondspots Prado Light + Ventilation: voor de voorraad- en diepvrieskast en rechtover voor het haardvolume<span class="k">30 tussen</span></li>
+        <li><span class="sw" style="background:#c9cbcb"></span>4 grondspots TAL Micro Ubo non focus (RVS) langs de ramen, ter hoogte van de 2 raamstijlen per gevel (248 en 572 van de kastenwand), net binnen<span class="k">Ø 5,5</span></li>
         <li><span class="sw" style="background:#fff7ea;border:1px solid var(--line)"></span>Flos Luce Orizzontale boven de eettafel<span class="k">± 210</span></li>
         <li><span class="sw" style="background:#5a4636"></span>Kast in haardvolume eetruimte: houten wandbekleding, 2 nissen met rugwand in Silver River, 3 glazen legplanken en ledlijn, verder een gesloten wand in houtfineer zonder deuren<span class="k">490 × 282</span></li>
         <li><span class="sw" style="background:#b9b3a8"></span>Eettafel in grijsbruine mortex, afgeronde vorm op 3 kolompoten, 10 stoelen met lederen zit<span class="k">360 × 100</span></li>
@@ -235,21 +237,21 @@ function floorPiece(x0,x1,z0,z1,m){const b=box(x0,x1,-0.02,0,z0,z1,m||mat.floor)
   for(let i=0;i<pos.count;i++)if(Math.abs(n.getY(i))>.5)uv.setXY(i,(pos.getX(i)+x0)/2.4,(pos.getZ(i)+z0)/2.4);uv.needsUpdate=true;}
 
 /* ---- vloer, gevels ---- */
-floorPiece(-0.06,8.11,-0.91,9.6);floorPiece(5.69,9.95,-2.37,-0.91);floorPiece(0,1.99,-2.0,-0.91);
+floorPiece(-0.04,8.11,-0.91,9.6);floorPiece(5.69,9.95,-2.37,-0.91);floorPiece(0,1.99,-2.0,-0.91);
 (function(){const glass=(x,z0,z1)=>{const g=box(x-0.01,x+0.01,0.02,H-0.02,z0,z1,mat.glass,walls);g.castShadow=false;
-    for(let z=z0;z<=z1+0.001;z+=(z1-z0)/Math.round((z1-z0)/2.4))box(x-0.03,x+0.03,0,H,Math.min(z,z1-0.04),Math.min(z,z1-0.04)+0.04,mat.frame,walls);
+    [2.48,2.48+3.24].forEach(z=>box(x-0.03,x+0.03,0,H,z-0.02,z+0.02,mat.frame,walls));
     [0,H-0.05].forEach(y=>box(x-0.03,x+0.03,y,y+0.05,z0,z1,mat.frame,walls));};
-  glass(-0.03,0,9.6);glass(8.14,0,9.6);})();
-W(-0.2,8.2,9.6,9.8);
+  glass(-0.01,-0.91,9.6);glass(8.085,0,9.6);})();
+W(-0.04,8.2,9.6,9.8);
 /* achter kastenwand */
-W(-0.2,0,-0.91,0);W(1.99,2.41,-0.91,-0.65);W(2.41,6.46,-0.91,-0.70);W(7.91,8.2,-0.91,-0.66);W(8.11,8.2,-0.66,0);
-W(-0.2,0,-2.0,-0.91);W(1.99,4.13,-2.6,-0.91);W(-0.2,1.99,-2.2,-2.0);
+box(-0.04,0,0,H,-0.91,0,mat.oakLight,walls);W(1.99,2.41,-0.91,-0.65);W(2.41,6.46,-0.91,-0.70);W(7.91,8.2,-0.91,-0.66);box(7.91,8.26,0,H,-0.91,0,mat.oakLight,walls);
+W(-0.04,0,-2.0,-0.91);W(1.99,4.13,-2.6,-0.91);W(-0.04,1.99,-2.2,-2.0);
 W(4.13,4.23,-2.6,-0.91);W(4.13,5.69,-2.6,-2.50);W(4.13,5.69,-0.80,-0.70);W(5.59,5.69,-2.5,-2.37);W(5.59,5.69,-0.91,-0.80);box(5.59,5.69,2.40,H,-2.37,-0.91,mat.wall,walls);W(5.69,10.15,-2.6,-2.37);W(7.85,8.2,-2.37,-1.77);W(7.85,8.2,-0.98,-0.91);W(9.95,10.15,-2.6,-1.70);W(9.95,10.15,-0.98,-0.66);W(8.2,10.15,-0.98,-0.66);box(9.95,10.15,2.25,H,-1.70,-0.98,mat.wall,walls);
-box(0,8.11,KH,H,-0.70,0,mat.wall,walls);
+box(0,8.11,KH,H,-0.70,0,mat.oakLight,walls);
 
 /* ---- kastenwand ---- */
 const kast=(x0,x1,m)=>box(x0,x1,0,KH,-0.66,-0.02,m||mat.oakLight);
-box(1.99,2.41,0,KH,-0.02,0,mat.oakLight);box(1.99,2.01,0,KH,-0.66,-0.02,mat.oakLight);box(2.39,2.41,0,KH,-0.66,-0.02,mat.oakLight);box(7.91,8.11,0,KH,-0.66,0,mat.oakLight);
+box(1.99,2.41,0,KH,-0.02,0,mat.oakLight);box(-0.04,0.30,0,H,-0.91,0,mat.oakLight,walls);box(1.99,2.01,0,KH,-0.66,-0.02,mat.oakLight);box(2.39,2.41,0,KH,-0.66,-0.02,mat.oakLight);box(7.91,8.11,0,KH,-0.66,0,mat.oakLight);
 function leaf(x0,x1,hingeLeft,dir,m,grip){const w=x1-x0,piv=new THREE.Group();piv.position.set(hingeLeft?x0:x1,0,0);scene.add(piv);
   const a=hingeLeft?0.001:-w+0.001,b=hingeLeft?w-0.001:-0.001;box(a,b,0,KH-0.003,-0.02,0,m||mat.oakLight,piv);
   if(grip){const gx=hingeLeft?w-0.034:-w+0.012;box(gx,gx+0.022,0.98,1.40,-0.006,0.0006,mat.handle,piv);}
@@ -389,6 +391,20 @@ function compendium(x,y,z0,z1,ceil,parent){const al=new THREE.MeshStandardMateri
   [z0+0.06,z1-0.06].forEach(z=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(0.0012,0.0012,ceil-y,4),cb);c.position.set(x,(ceil+y)/2,z);P.add(c);
     const r=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,0.012,16),al);r.position.set(x,ceil-0.006,z);P.add(r);});
   const pl=new THREE.PointLight(0xffe2b8,0.5,3,2);pl.position.set(x,y-0.15,(z0+z1)/2);P.add(pl);}
+/* TAL Micro Ubo non focus: inbouwgrondspots (Ø55, RVS 316, 36°) langs de ramen aan de binnenkant, 2 per lange zijde */
+(function(){const rvs=M(0xc9cbcb,{metalness:.8,roughness:.25}),lens=new THREE.MeshBasicMaterial({color:0xfff0d0});
+  /* stalen kolommen ø90 massief in de gevels (SK 0.7 / 0.8 / 0.9 / 0.12) */
+  [[0.14,2.48],[0.14,5.72],[7.93,2.48],[7.93,5.72]].forEach(([x,z])=>{const r1=new THREE.Mesh(new THREE.CylinderGeometry(0.0275,0.0275,0.004,24),rvs);r1.position.set(x,0.001,z);scene.add(r1);
+    const l=new THREE.Mesh(new THREE.CircleGeometry(0.018,20),lens);l.rotation.x=-Math.PI/2;l.position.set(x,0.0035,z);scene.add(l);
+    const sp=new THREE.SpotLight(0xffe2b8,0.9,3.2,0.32,0.7,1.6);sp.position.set(x,0.02,z);sp.target.position.set(x,2.5,z);scene.add(sp);scene.add(sp.target);});})();
+/* 2 plafondspots Prado Light + Ventilation (short) voor de voorraad-/diepvrieskast, 30 cm uit elkaar */
+(function(){const wh=M(0xf3f2ef,{roughness:.9}),dk=M(0x1a1a1a,{roughness:.6}),lens=new THREE.MeshBasicMaterial({color:0xfff3dc});
+  [[4.285,0.45,-0.3],[4.585,0.45,-0.3],[4.285,8.65,9.4],[4.585,8.65,9.4]].forEach(([x,z,tz])=>{
+    const r=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.008,32),wh);r.position.set(x,H-0.004,z);scene.add(r);
+    const g=new THREE.Mesh(new THREE.TorusGeometry(0.045,0.004,6,32),dk);g.rotation.x=Math.PI/2;g.position.set(x,H-0.009,z);scene.add(g);
+    const c=new THREE.Mesh(new THREE.CylinderGeometry(0.028,0.028,0.01,24),dk);c.position.set(x,H-0.012,z);scene.add(c);
+    const l=new THREE.Mesh(new THREE.CircleGeometry(0.014,16),lens);l.rotation.x=Math.PI/2;l.position.set(x,H-0.018,z);scene.add(l);
+    const sp=new THREE.SpotLight(0xffe6c4,0.9,4.0,0.45,0.6,1.6);sp.position.set(x,H-0.05,z);sp.target.position.set(x,0.6,tz);scene.add(sp);scene.add(sp.target);});})();
 const pendG=new THREE.Group();scene.add(pendG);compendium(3.28,1.85,1.45,4.75,H,pendG);compendium(5.52,1.85,1.45,4.75,H,pendG);
 /* alternatief: Prado Trimless Spot Adjustable (Ø57, uitsparing Ø76, kantelbaar 40°), per eiland 3 paren: 30 | 90 | 30 | 90 | 30 */
 const spotG=new THREE.Group();spotG.visible=false;scene.add(spotG);
@@ -519,8 +535,8 @@ let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>
     for(let i=0;i<n;i++){g.fillStyle=cols[(r()*cols.length)|0];g.globalAlpha=.35+r()*.5;g.beginPath();g.arc(r()*c.width,r()*c.height,rmin+r()*(rmax-rmin),0,7);g.fill();}g.globalAlpha=1;
     const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;};
   /* extensief groen: Hakonechloa macra (Japans bosgras) */
-  const soil=new THREE.Mesh(new THREE.BoxGeometry(8.26,0.06,6.19),M(0x3b3326,{roughness:1}));soil.position.set(12.27,0.0,6.505);soil.receiveShadow=true;scene.add(soil);
-  box(8.14,16.4,0,0.08,3.41,3.45,M(0x55524d,{metalness:.5,roughness:.5}));
+  const soil=new THREE.Mesh(new THREE.BoxGeometry(6.31,0.06,6.19),M(0x3b3326,{roughness:1}));soil.position.set(13.245,0.0,6.505);soil.receiveShadow=true;scene.add(soil);
+  box(10.09,16.4,0,0.08,3.41,3.45,M(0x55524d,{metalness:.5,roughness:.5}));box(10.09,10.13,0,0.08,3.41,9.6,M(0x55524d,{metalness:.5,roughness:.5}));
   const clumpGeo=(function(){const pos=[],nor=[];const add=(g,mx)=>{g=g.toNonIndexed();g.applyMatrix4(mx);const p=g.attributes.position.array,n=g.attributes.normal.array;for(let i=0;i<p.length;i++){pos.push(p[i]);nor.push(n[i]);}};
     const seg=(L,w0,w1)=>{const g=new THREE.CylinderGeometry(w1,w0,L,3,1,true);g.scale(1,1,0.18);g.translate(0,L/2,0);return g;};
     for(let b=0;b<60;b++){const az=r()*Math.PI*2,t0=0.12+r()*0.45,Ls=[0.16+r()*0.08,0.13+r()*0.07,0.11+r()*0.07],ws=[0.016,0.014,0.010,0.001];
@@ -534,7 +550,7 @@ let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>
     const per=Math.ceil(pts.length/4);mats.forEach((m,k)=>{const im=new THREE.InstancedMesh(clumpGeo,m,per);const o=new THREE.Object3D();
       for(let i=0;i<per;i++){const q=pts[(k*per+i)%pts.length];o.position.set(q[0],0.03,q[1]);o.rotation.set(0,r()*6.3,0);const sc=0.9+r()*0.7;o.scale.set(sc*1.25,sc,sc*1.25);o.updateMatrix();im.setMatrixAt(i,o.matrix);}
       im.castShadow=false;im.receiveShadow=false;scene.add(im);});};
-  __hako([8.4,16.2,3.65,9.45],220);
+  __hako([10.55,16.2,3.65,9.45],165);
   /* gazon en tuin oost */
   const grT=tex('#5f7d3c',['#6f8f48','#557336','#7a9a50','#4b6a30'],9000,1,4,1024,1024);grT.repeat.set(10,10);
   const lawn=new THREE.Mesh(new THREE.BoxGeometry(22,0.04,30),new THREE.MeshStandardMaterial({map:grT,roughness:1}));lawn.position.set(16.4+11,-0.03,4.5);lawn.receiveShadow=true;scene.add(lawn);
@@ -545,9 +561,9 @@ let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>
   /* lage heester- en grassenrand langs het terras */
   for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.IcosahedronGeometry(0.35+r()*0.25,1),leafM[i%4]);b.scale.y=0.7;b.position.set(17.2+r()*1.4,0.25,-3+i*1.2+r()*0.5);b.castShadow=true;scene.add(b);}
   /* tuin west */
-  const lawnW=new THREE.Mesh(new THREE.BoxGeometry(19.4,0.04,30),new THREE.MeshStandardMaterial({map:grT,roughness:1}));lawnW.position.set(-2.335-9.7,-0.03,4.5);lawnW.receiveShadow=true;scene.add(lawnW);
+  const lawnW=new THREE.Mesh(new THREE.BoxGeometry(19.4,0.04,30),new THREE.MeshStandardMaterial({map:grT,roughness:1}));lawnW.position.set(-2.125-9.7,-0.03,4.5);lawnW.receiveShadow=true;scene.add(lawnW);
   /* vijver langs de westgevel (± 233 breed), met stapsteen */
-  {const px0=-2.215,px1=-0.25,pz0=0.0,pz1=15.0,cop=M(0x6f6a63,{roughness:.85});
+  {const px0=-2.005,px1=-0.04,pz0=0.0,pz1=15.0,cop=M(0x6f6a63,{roughness:.85});
    box(px0,px1,-0.45,-0.40,pz0,pz1,M(0x1d2420,{roughness:1}));
    box(px0-0.12,px0,-0.42,0.01,pz0-0.12,pz1+0.12,cop);box(px0,px1,-0.42,0.01,pz0-0.12,pz0,cop);box(px0,px1,-0.42,0.01,pz1,pz1+0.12,cop);box(px1,px1+0.05,-0.42,0.01,pz0,pz1,cop);
    const wc=document.createElement('canvas');wc.width=512;wc.height=512;const g=wc.getContext('2d');g.fillStyle='#2c4a4e';g.fillRect(0,0,512,512);
@@ -564,7 +580,7 @@ let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>
        for(let k=0;k<n;k++){const a=rot+k/n*Math.PI*2+(r()-.5)*0.5,rr=R*(0.8+r()*0.35);const qx=Math.cos(a)*rr*el,qz=Math.sin(a)*rr/el;k?sh.lineTo(qx,qz):sh.moveTo(qx,qz);}
        const g=new THREE.ExtrudeGeometry(sh,{depth:0.05,bevelEnabled:true,bevelThickness:0.006,bevelSize:0.008,bevelSegments:1});g.rotateX(Math.PI/2);
        const m=new THREE.Mesh(g,sm[i%3]);m.position.set(x,0.025,z);m.castShadow=m.receiveShadow=true;scene.add(m);});}
-   const lily=M(0x4f6b34,{roughness:.7});[[-1.9,6.2],[-1.6,6.6],[-1.95,7.1],[-1.0,9.8],[-1.3,10.3],[-1.8,12.4]].forEach(([x,z])=>{const l=new THREE.Mesh(new THREE.CircleGeometry(0.13+r()*0.08,14,0.3,5.8),lily);l.rotation.x=-Math.PI/2;l.position.set(x,-0.055,z);scene.add(l);});
+   const lily=M(0x4f6b34,{roughness:.7});[[-1.69,6.2],[-1.39,6.6],[-1.74,7.1],[-0.79,9.8],[-1.09,10.3],[-1.59,12.4]].forEach(([x,z])=>{const l=new THREE.Mesh(new THREE.CircleGeometry(0.13+r()*0.08,14,0.3,5.8),lily);l.rotation.x=-Math.PI/2;l.position.set(x,-0.055,z);scene.add(l);});
    __hako([px0-0.9,px0-0.2,0.3,2.3],5);__hako([px0-0.9,px0-0.2,6.2,14.5],17);}
   [[-5.5,-2.0,3.6,1.8],[-9.0,3.5,4.4,2.2],[-6.0,9.5,3.0,1.5],[-12.5,-3.5,4.8,2.4],[-13.0,8.0,3.8,1.9],[-8.5,15.0,4.2,2.1],[-16.5,2.5,5.0,2.5],[-17.5,13.5,3.6,1.8]].forEach(([x,z,h,c],k)=>tree(x,z,h,c,k+2));
   for(let i=0;i<10;i++){if(i>=2&&i<=6)continue;const b=new THREE.Mesh(new THREE.IcosahedronGeometry(0.35+r()*0.25,1),leafM[i%4]);b.scale.y=0.7;b.position.set(-3.4-r()*1.2,0.25,0.5+i*1.0+r()*0.4);b.castShadow=true;scene.add(b);}
@@ -572,7 +588,9 @@ let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>
   box(16.6,38,0,1.8,-7.0,-6.2,M(0x3f5a2c,{roughness:1}));
 })();
 /* ---- terras / buitenkeuken ---- */
-(function(){floorPiece(8.11,16.4,-0.66,3.41);
+(function(){floorPiece(8.11,16.4,-0.66,3.41);floorPiece(8.11,10.09,3.41,9.6);
+  /* buitengrondspots TAL Micro Ubo in het verlengde van de spots binnen */
+  {const rvs=M(0xc9cbcb,{metalness:.8,roughness:.25}),lens=new THREE.MeshBasicMaterial({color:0xfff0d0});[2.48,5.72].forEach(z=>{const x=8.32;const r1=new THREE.Mesh(new THREE.CylinderGeometry(0.0275,0.0275,0.004,24),rvs);r1.position.set(x,0.001,z);scene.add(r1);const l=new THREE.Mesh(new THREE.CircleGeometry(0.018,20),lens);l.rotation.x=-Math.PI/2;l.position.set(x,0.0035,z);scene.add(l);const sp=new THREE.SpotLight(0xffe2b8,0.9,3.2,0.32,0.7,1.6);sp.position.set(x,0.02,z);sp.target.position.set(x,2.5,z);scene.add(sp);scene.add(sp.target);});}
   W(8.2,10.51,-0.91,-0.66);W(11.41,16.4,-0.91,-0.66);
   [[8.26,0.75],[9.01,0.75],[9.76,0.75]].forEach(([x,w],k)=>{
     box(x,x+w,0,KH,-0.66,-0.64,mat.carc);box(x,x+0.02,0,KH,-0.66,-0.04,mat.carc);box(x+w-0.02,x+w,0,KH,-0.66,-0.04,mat.carc);box(x,x+w,0,0.08,-0.66,-0.04,mat.oakLight);box(x,x+w,KH-0.02,KH,-0.66,-0.04,mat.carc);
