@@ -50,8 +50,6 @@ li{display:flex;gap:10px;align-items:baseline}
       <button id="v-over" aria-pressed="true">Overzicht</button>
       <button id="v-eil" aria-pressed="false">Eilanden</button>
       <button id="v-kast" aria-pressed="false">Kastenwand</button>
-      <button id="v-koffie" aria-pressed="false">Koffiehoek</button>
-      <button id="v-oven" aria-pressed="false">Ovens en wijn</button>
       <button id="v-pantry" aria-pressed="false">Pantry</button>
       <button id="v-terras" aria-pressed="false">Buitenkeuken</button>
       <button id="v-haard" aria-pressed="false">Haardvolume</button>
@@ -62,8 +60,11 @@ li{display:flex;gap:10px;align-items:baseline}
     <div class="tools">
       <button id="fs" aria-pressed="false">Volledig scherm</button>
       <button id="tour" aria-pressed="false">Rondleiding</button>
+      <button id="pocket" aria-pressed="false">Schuifdeuren openen</button>
       <button id="doors" aria-pressed="false">Kasten openen</button>
       <button id="rdoors" aria-pressed="false">Deuren openen</button>
+      <button id="spots" aria-pressed="false" title="Prado-spots i.p.v. Compendium-pendels boven de eilanden">Spots</button>
+      <button id="table" aria-pressed="false">Tafel in hout</button>
       <button id="walls" aria-pressed="true">Muren laag</button>
     </div>
   </div>
@@ -92,12 +93,12 @@ li{display:flex;gap:10px;align-items:baseline}
     <div class="card">
       <h2>Pantry en buitenkeuken</h2>
       <ul>
-        <li><span class="sw" style="background:#a6a29c"></span>Pantry-aanrecht: werkblad geborstelde inox met ingelaste Blanco CLARON 340-U, Fantini Nostromo 42021852F (geborsteld inox, uittrekbaar), rugwand Silver River<span class="k">135</span></li>
+        <li><span class="sw" style="background:#a6a29c"></span>Pantry-aanrecht (199 breed, tot tegen de muurkop aan het sas): werkblad geborstelde inox met ingelaste Blanco CLARON 340-U, Fantini Nostromo 42021852F (geborsteld inox, uittrekbaar), rugwand Silver River<span class="k">135</span></li>
         <li><span class="sw" style="background:#543d31"></span>Pantry met doorloop naar sas en kastenwand bijkeuken; geïsoleerde deur d0.09 met slot naar garage<span class="k">216 + 175</span></li>
-        <li><span class="sw" style="background:#f1f2f1;border:1px solid var(--line)"></span>Koelcel achter de kastenwand, dubbele deur over de volle breedte van de pantry; open legkast haaks in de doorgang, 35 × 85 (5 legplanken met ledlijn), pocket voor de deuren van de wijnkolom ernaast<span class="k">136 × 170</span></li>
-        <li><span class="sw" style="background:#2a2826"></span>Overdekt terras 432 breed (incl. kastenwand), extensief groen (Hakonechloa macra) ernaast, tuin met bomen aan oost- en westzijde, vijver (196,5 breed) langs de westgevel met stapstenen. Buitenkeuken: kasten en lades (openen mee), deur naar de garage, brandende buitenhaard (Metalfire) met houtopslag eronder, werkblad, Big Green Egg Large Onyx (ingebouwd), inox achterwand; schuifpaneel van 303 cm voor de keuken (schuift open met de kasten)<span class="k">769 breed</span></li>
+        <li><span class="sw" style="background:#f1f2f1;border:1px solid var(--line)"></span>Koelcel achter de kastenwand, deur van 85 cm naast het aanrecht (draait naar de doorgang); open legkast haaks in de doorgang, 35 × 85 (5 legplanken met ledlijn), pocket voor de deuren van de wijnkolom ernaast<span class="k">136 × 170</span></li>
+        <li><span class="sw" style="background:#2a2826"></span>Overdekt terras 432 breed (incl. kastenwand), extensief groen (Hakonechloa macra) ernaast, tuin met bomen aan oost- en westzijde, vijver (196,5 breed) langs de westgevel met een dwarse stapplaat, stapstenen lopen door in de tuin. Buitenkeuken: kasten en lades (openen mee), deur naar de garage, brandende buitenhaard (Metalfire) met houtopslag eronder, werkblad, Big Green Egg Large Onyx (ingebouwd), inox achterwand; schuifpaneel van 303 cm voor de keuken (schuift open met de knop Schuifdeuren)<span class="k">769 breed</span></li>
         <li><span class="sw" style="background:#fff7ea;border:1px solid var(--line)"></span>Flos Luce Orizzontale boven de eettafel<span class="k">± 210</span></li>
-        <li><span class="sw" style="background:#5a4636"></span>Kast in haardvolume eetruimte: houten wandbekleding, 2 nissen met rugwand in Silver River, 3 glazen legplanken en ledlijn, dubbele deur met legkast in het midden (opent mee)<span class="k">490 × 282</span></li>
+        <li><span class="sw" style="background:#5a4636"></span>Kast in haardvolume eetruimte: houten wandbekleding, 2 nissen met rugwand in Silver River, 3 glazen legplanken en ledlijn, verder een gesloten wand in houtfineer zonder deuren<span class="k">490 × 282</span></li>
         <li><span class="sw" style="background:#b9b3a8"></span>Eettafel in grijsbruine mortex, afgeronde vorm op 3 kolompoten, 10 stoelen met lederen zit<span class="k">360 × 100</span></li>
       </ul>
     </div>
@@ -243,7 +244,7 @@ W(-0.2,8.2,9.6,9.8);
 /* achter kastenwand */
 W(-0.2,0,-0.91,0);W(1.99,2.41,-0.91,-0.65);W(2.41,6.46,-0.91,-0.70);W(7.91,8.2,-0.91,-0.66);W(8.11,8.2,-0.66,0);
 W(-0.2,0,-2.0,-0.91);W(1.99,4.13,-2.6,-0.91);W(-0.2,1.99,-2.2,-2.0);
-W(4.13,4.23,-2.6,-0.91);W(4.13,5.69,-2.6,-2.50);W(4.13,5.69,-0.80,-0.70);W(5.59,5.69,-2.5,-2.37);W(5.59,5.69,-0.91,-0.80);box(5.59,5.69,2.40,H,-2.37,-0.91,mat.wall,walls);W(5.69,10.15,-2.6,-2.37);W(7.85,8.2,-2.37,-2.30);W(7.85,8.2,-0.98,-0.91);W(9.95,10.15,-2.6,-1.70);W(9.95,10.15,-0.98,-0.66);W(8.2,10.15,-0.98,-0.66);box(9.95,10.15,2.25,H,-1.70,-0.98,mat.wall,walls);
+W(4.13,4.23,-2.6,-0.91);W(4.13,5.69,-2.6,-2.50);W(4.13,5.69,-0.80,-0.70);W(5.59,5.69,-2.5,-2.37);W(5.59,5.69,-0.91,-0.80);box(5.59,5.69,2.40,H,-2.37,-0.91,mat.wall,walls);W(5.69,10.15,-2.6,-2.37);W(7.85,8.2,-2.37,-1.77);W(7.85,8.2,-0.98,-0.91);W(9.95,10.15,-2.6,-1.70);W(9.95,10.15,-0.98,-0.66);W(8.2,10.15,-0.98,-0.66);box(9.95,10.15,2.25,H,-1.70,-0.98,mat.wall,walls);
 box(0,8.11,KH,H,-0.70,0,mat.wall,walls);
 
 /* ---- kastenwand ---- */
@@ -259,7 +260,7 @@ roomDoors.push(leaf(0.30,1.145,true,1,null,true),leaf(1.145,1.99,false,-1,null,t
 roomDoors.push(leaf(6.90,7.91,false,-1,null,false));
 /* sectie A: koffiehoek (1.81-3.16) */
 (function(){const x0=2.41,x1=3.76;box(x0,x1,0,KH,-0.66,-0.64,mat.silver);
-  [x0,x1-0.02].forEach(x=>box(x,x+0.02,0,KH,-0.66,-0.02,mat.carc));
+  [x0,x1-0.02].forEach(x=>box(x,x+0.02,0,KH,-0.66,-0.02,mat.oakLight));
   box(x0+0.02,x1-0.02,0,0.08,-0.64,-0.06,mat.black);
   [0.08,0.38,0.66].forEach((y,k)=>{const g=new THREE.Group();scene.add(g);drawers.push(g);box(x0+0.025,x1-0.025,y,y+0.27,-0.06,-0.04,mat.oakLight,g);
     box((x0+x1)/2-0.12,(x0+x1)/2+0.12,y+0.24,y+0.25,-0.04,-0.035,mat.handle,g);box(x0+0.04,x1-0.04,y+0.01,y+0.012,-0.62,-0.06,mat.carc,g);});
@@ -304,7 +305,7 @@ roomDoors.push(leaf(6.90,7.91,false,-1,null,false));
   [1.15,1.5,1.85,2.2,2.5].forEach((y,k)=>{box(xm+0.02,x1-0.03,y,y+0.02,-0.62,-0.06,mat.carc);for(let n=0;n<4;n++)box(xm+0.06+n*0.14,xm+0.16+n*0.14,y+0.02,y+0.16+((n+k)%3)*0.04,-0.50,-0.30,C(n+k));});
   leaves.push(leaf(x0,xm,true,-1,null,true),leaf(xm,x1,false,1,null,true));})();
 /* sectie C: ovens + wijnkoelers (4.51-5.86) */
-(function(){const x0=5.11,x1=6.46,xm=(x0+x1)/2;box(x0,x1,0,KH,-0.66,-0.64,mat.silver);[x0,xm-0.01,x1-0.02].forEach(x=>box(x,x+0.02,0,KH,-0.66,-0.02,mat.carc));
+(function(){const x0=5.11,x1=6.46,xm=(x0+x1)/2;box(x0,x1,0,KH,-0.66,-0.64,mat.silver);[x0,x1-0.02].forEach(x=>box(x,x+0.02,0,KH,-0.66,-0.02,mat.oakLight));box(xm-0.01,xm+0.01,0,KH,-0.66,-0.02,mat.oakLight);
   [x0+0.02,xm+0.01].forEach((xa,k)=>{const xb=xa+0.64;
     box(xa,xb,0.05,0.91,-0.62,-0.60,M(0x2a2a2a,{roughness:.6}));[xa,xb-0.02].forEach(x=>box(x,x+0.02,0.05,0.91,-0.62,-0.05,M(0x1d1d1d,{roughness:.4})));
     box(xa,xb,0.05,0.10,-0.62,-0.05,M(0x1d1d1d));box(xa,xb,0.89,0.91,-0.62,-0.05,M(0x1d1d1d));
@@ -326,12 +327,12 @@ roomDoors.push(leaf(6.90,7.91,false,-1,null,false));
   pockets.push({x0,x1,side:1,pocket:6.50});})();
 /* pocketdeuren A en C */
 pockets.forEach(p=>{const w=(p.x1-p.x0)/2;p.w=w;p.leaves=[0,1].map(k=>{const g=new THREE.Group();scene.add(g);
-  const a=p.side<0?0.001:-w+0.001,b=p.side<0?w-0.001:-0.001;box(a,b,0,KH-0.003,-0.02,0,mat.oakLight,g);
-  const gx=p.side<0?(k===1?w-0.034:0.012):(k===0?-w+0.012:-0.034);if((p.side<0&&k===1)||(p.side>0&&k===0))box(gx,gx+0.022,0.98,1.40,-0.006,0.0006,mat.handle,g);
+  const a=k===0?0.001:-w+0.001,b=k===0?w-0.001:-0.001;box(a,b,0,KH-0.003,-0.02,0,mat.oakLight,g);
+  const gx=k===0?w-0.034:-w+0.012;box(gx,gx+0.022,0.98,1.40,-0.006,0.0006,mat.handle,g);
   return {g,k};});});
-function setPockets(e){pockets.forEach(p=>p.leaves.forEach(({g,k})=>{const w=p.w,rot=Math.min(1,e*2),sl=Math.max(0,e*2-1),s2=sl*sl*(3-2*sl);
-  if(p.side<0){const x0=p.x0+k*w,xp=p.pocket+0.05+k*0.14;g.rotation.y=-rot*Math.PI/2;g.position.set(x0+(xp-x0)*s2,0,-(w+0.03)*s2);}
-  else{const x0=p.x0+(k+1)*w,xp=p.pocket+(k===1?0.03:0);g.rotation.y=rot*Math.PI/2;g.position.set(x0+(xp-x0)*s2,0,-(w+0.03)*s2);}}));}
+/* links schuift de linkse deur in de linkse zijwand, rechts de rechtse in de rechtse */
+function setPockets(e){pockets.forEach(p=>p.leaves.forEach(({g,k})=>{const rot=Math.min(1,e*2),sl=Math.max(0,e*2-1),s2=sl*sl*(3-2*sl);
+  const hx=k===0?p.x0:p.x1,px=k===0?p.x0+0.022:p.x1-0.022;g.rotation.y=(k===0?-1:1)*rot*Math.PI/2;g.position.set(hx+(px-hx)*s2,0,-0.62*s2);}));}
 setPockets(0);
 /* ---- eilanden ---- */
 function island(xs0,xs1,xw0,xw1,aisleX,dirA,kind){const z0=1.22,z1=4.97,zw1=4.37,top=0.97,wtop=1.07;
@@ -388,7 +389,16 @@ function compendium(x,y,z0,z1,ceil,parent){const al=new THREE.MeshStandardMateri
   [z0+0.06,z1-0.06].forEach(z=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(0.0012,0.0012,ceil-y,4),cb);c.position.set(x,(ceil+y)/2,z);P.add(c);
     const r=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,0.012,16),al);r.position.set(x,ceil-0.006,z);P.add(r);});
   const pl=new THREE.PointLight(0xffe2b8,0.5,3,2);pl.position.set(x,y-0.15,(z0+z1)/2);P.add(pl);}
-compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
+const pendG=new THREE.Group();scene.add(pendG);compendium(3.28,1.85,1.45,4.75,H,pendG);compendium(5.52,1.85,1.45,4.75,H,pendG);
+/* alternatief: Prado Trimless Spot Adjustable (Ø57, uitsparing Ø76, kantelbaar 40°), per eiland 3 paren: 30 | 90 | 30 | 90 | 30 */
+const spotG=new THREE.Group();spotG.visible=false;scene.add(spotG);
+(function(){const ring=M(0xf3f2ef,{roughness:.9}),inner=M(0x141414,{roughness:.5}),lens=new THREE.MeshBasicMaterial({color:0xfff3dc});
+  const zs=[0,0.30,1.20,1.50,2.40,2.70].map(d=>3.095-1.35+d);
+  [3.28,5.52].forEach(x=>{
+    zs.forEach((z,i)=>{const rg=new THREE.Mesh(new THREE.CylinderGeometry(0.038,0.038,0.008,24),ring);rg.position.set(x,H-0.004,z);spotG.add(rg);const h=new THREE.Mesh(new THREE.CylinderGeometry(0.0285,0.0285,0.012,24),inner);h.position.set(x,H-0.018,z);spotG.add(h);
+      const l=new THREE.Mesh(new THREE.CircleGeometry(0.014,16),lens);l.rotation.x=Math.PI/2;l.position.set(x+(i%2?0.004:-0.004),H-0.0245,z);spotG.add(l);});
+    [0,2,4].forEach(i=>{const zc=(zs[i]+zs[i+1])/2,sp=new THREE.SpotLight(0xffe6c4,1.1,4.5,0.42,0.6,1.6);sp.position.set(x,H-0.05,zc);sp.target.position.set(x,0.97,zc);spotG.add(sp);spotG.add(sp.target);});});})();
+let spotsOn=false;document.getElementById('spots').addEventListener('click',()=>{spotsOn=!spotsOn;spotG.visible=spotsOn;pendG.visible=!spotsOn;const b=document.getElementById('spots');b.setAttribute('aria-pressed',String(spotsOn));b.textContent=spotsOn?'Pendels':'Spots';});
 
 (function(){const y=1.65,z=6.9,x0=3.45,x1=5.55,cb=M(0x222222,{roughness:.6}),cap=M(0x2a2622,{metalness:.5,roughness:.35});
   const tube=new THREE.Mesh(new THREE.CylinderGeometry(0.024,0.024,x1-x0,24),new THREE.MeshStandardMaterial({color:0xfff7ea,emissive:0xffe2b0,emissiveIntensity:1.3,roughness:.4}));
@@ -407,8 +417,10 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
   const cx=4.5,cz=6.9,L=3.6,Wd=1.1,r=Wd/2;
   const sh=new THREE.Shape();sh.moveTo(-L/2+r,-Wd/2);sh.lineTo(L/2-r,-Wd/2);sh.absarc(L/2-r,0,r,-Math.PI/2,Math.PI/2,false);sh.lineTo(-L/2+r,Wd/2);sh.absarc(-L/2+r,0,r,Math.PI/2,Math.PI*1.5,false);
   const tg=new THREE.ExtrudeGeometry(sh,{depth:0.07,bevelEnabled:true,bevelThickness:0.01,bevelSize:0.012,bevelSegments:2,curveSegments:32});tg.rotateX(-Math.PI/2);
-  const tp=new THREE.Mesh(tg,tw);tp.position.set(cx,0.68,cz);tp.castShadow=tp.receiveShadow=true;scene.add(tp);
-  [-1.15,0,1.15].forEach(dx=>{const lg=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.21,0.68,8),tw);lg.position.set(cx+dx,0.34,cz);lg.castShadow=true;scene.add(lg);});
+  const tp=new THREE.Mesh(tg,tw);tp.position.set(cx,0.68,cz);tp.castShadow=tp.receiveShadow=true;scene.add(tp);const tMeshes=[tp];
+  const wood=new THREE.MeshStandardMaterial({map:oakTex(1),color:0xc9a27a,roughness:.55});wood.map.wrapS=wood.map.wrapT=THREE.RepeatWrapping;wood.map.repeat.set(0.45,0.45);
+  [-1.15,0,1.15].forEach(dx=>{const lg=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.21,0.68,8),tw);lg.position.set(cx+dx,0.34,cz);lg.castShadow=true;scene.add(lg);tMeshes.push(lg);});
+  let isWood=false;document.getElementById('table').addEventListener('click',()=>{isWood=!isWood;tMeshes.forEach(m=>m.material=isWood?wood:tw);const b=document.getElementById('table');b.setAttribute('aria-pressed',String(isWood));b.textContent=isWood?'Tafel in mortex':'Tafel in hout';});
   const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.22,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),M(0xb9a68c,{roughness:.8,side:THREE.DoubleSide}));bowl.scale.y=0.45;bowl.position.set(cx,0.86,cz);scene.add(bowl);
   const wd=M(0x3e2a1d,{roughness:.55}),lea=M(0x7a4a28,{roughness:.6});
   const chair=(x,z,f)=>{const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=typeof f==='string'?(f==='w'?-Math.PI/2:Math.PI/2):(f>0?0:Math.PI);scene.add(g);
@@ -420,14 +432,14 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
 })();
 
 /* ---- pantry ---- */
-(function(){box(6.50,7.85,0,0.71,-2.37,-1.77,mat.oakLight);box(6.50,6.66,0.71,0.87,-2.37,-1.77,mat.oakLight);box(7.00,7.85,0.71,0.87,-2.37,-1.77,mat.oakLight);box(6.66,7.00,0.71,0.87,-2.37,-2.25,mat.oakLight);box(6.66,7.00,0.71,0.87,-1.85,-1.77,mat.oakLight);
+(function(){const AX0=5.86,AX1=7.85,sx0=AX0+0.31,sx1=sx0+0.34;box(AX0,AX1,0,0.71,-2.37,-1.77,mat.oakLight);box(AX0,sx0,0.71,0.87,-2.37,-1.77,mat.oakLight);box(sx1,AX1,0.71,0.87,-2.37,-1.77,mat.oakLight);box(sx0,sx1,0.71,0.87,-2.37,-2.25,mat.oakLight);box(sx0,sx1,0.71,0.87,-1.85,-1.77,mat.oakLight);
   /* werkblad geborstelde inox met ingelaste Blanco CLARON 340-U */
-  const sx0=6.66,sx1=7.00,sz0=-2.25,sz1=-1.85,T=0.91,rv=M(0x9a9d9f,{metalness:.65,roughness:.3});
-  box(6.50,7.85,0.87,T,-2.37,sz0,mat.inox);box(6.50,7.85,0.87,T,sz1,-1.77,mat.inox);box(6.50,sx0,0.87,T,sz0,sz1,mat.inox);box(sx1,7.85,0.87,T,sz0,sz1,mat.inox);
+  const sz0=-2.25,sz1=-1.85,T=0.91,rv=M(0x9a9d9f,{metalness:.65,roughness:.3});
+  box(AX0,AX1,0.87,T,-2.37,sz0,mat.inox);box(AX0,AX1,0.87,T,sz1,-1.77,mat.inox);box(AX0,sx0,0.87,T,sz0,sz1,mat.inox);box(sx1,AX1,0.87,T,sz0,sz1,mat.inox);
   box(sx0,sx1,0.72,0.73,sz0,sz1,rv);box(sx0,sx0+0.003,0.72,T,sz0,sz1,rv);box(sx1-0.003,sx1,0.72,T,sz0,sz1,rv);box(sx0,sx1,0.72,T,sz0,sz0+0.003,rv);box(sx0,sx1,0.72,T,sz1-0.003,sz1,rv);
   const dr=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.035,0.004,24),M(0x5c5f61,{metalness:.7,roughness:.3}));dr.position.set((sx0+sx1)/2,0.732,-1.95);scene.add(dr);
   /* rugwand Silver River */
-  box(6.50,7.85,T,H,-2.37,-2.35,mat.silver);
+  box(AX0,AX1,T,H,-2.37,-2.35,mat.silver);
   /* Fantini Nostromo 42021852F: eengats spoeltafelmengkraan met uittrekbare handdouche, geborsteld inox (h 34,5 / uitloop 18,5 cm) */
   {const ti=M(0xc4c6c6,{metalness:.72,roughness:.36}),x=(sx0+sx1)/2,z=-2.30;
    const col=new THREE.Mesh(new THREE.CylinderGeometry(0.0165,0.0165,0.20,28),ti);col.position.set(x,T+0.10,z);scene.add(col);
@@ -435,8 +447,8 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
    scene.add(new THREE.Mesh(new THREE.TubeGeometry(sp,40,0.011,14,false),ti));
    const hd=new THREE.Mesh(new THREE.CylinderGeometry(0.014,0.0135,0.075,20),ti);hd.position.set(x,T+0.215,z+0.185);scene.add(hd);
    const lv=new THREE.Mesh(new THREE.CylinderGeometry(0.0055,0.0055,0.05,12),ti);lv.rotation.z=Math.PI/2;lv.position.set(x+0.04,T+0.15,z);scene.add(lv);}
-  [1.45,1.85,2.25].forEach(y=>{box(6.50,7.85,y,y+0.03,-2.37,-2.07,mat.oakLight);box(6.51,7.84,y-0.004,y,-2.11,-2.09,mat.led);
-    for(let n=0;n<5;n++)box(6.6+n*0.23,6.78+n*0.23,y+0.03,y+0.14+(n%3)*0.05,-2.32,-2.12,C(n+y*7));});
+  [1.45,1.85,2.25].forEach(y=>{box(AX0,AX1,y,y+0.03,-2.37,-2.07,mat.oakLight);box(AX0+0.01,AX1-0.01,y-0.004,y,-2.11,-2.09,mat.led);
+    for(let n=0;n<8;n++)box(AX0+0.08+n*0.235,AX0+0.26+n*0.235,y+0.03,y+0.14+(n%3)*0.05,-2.32,-2.12,C(n+y*7));});
   (function(){const x0=6.55,x1=6.90,z0=-0.91,z1=-0.02;box(6.46,6.55,KH-0.03,KH,z0,z1,mat.oakLight);box(6.462,6.90,0.003,KH-0.003,-0.02,0,mat.oakLight);box(6.46,6.55,0,0.08,z0,z1,mat.oakLight);
     box(x0,x0+0.02,0,KH,z0,z1,mat.silver);box(x0,x1,0,KH,z0,z0+0.02,mat.oakLight);box(x0,x1,0,KH,z1-0.02,z1,mat.oakLight);
     box(x0,x1,0,0.08,z0,z1,mat.oakLight);box(x0,x1,KH-0.03,KH,z0,z1,mat.oakLight);
@@ -472,11 +484,11 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
     [4.29,5.53].forEach(x=>box(x,x+0.02,0,1.75,z0,z0+0.02,ss));};
   shelf(-2.44,-2.04);shelf(-1.26,-0.86);
   box(4.30,4.70,0,0.5,-1.95,-1.35,M(0x6e8c9a));box(4.35,4.65,0.5,0.62,-1.9,-1.4,M(0x9ab0bb));
-  const W2=(2.37-0.91)/2;
-  [[-2.37,1,1],[-0.91,-1,-1]].forEach(([hz,sg,dr])=>{const piv=new THREE.Group();piv.position.set(5.69,0,hz);scene.add(piv);
-    const a=sg>0?0:-W2,b=sg>0?W2:0;box(-0.10,0.01,0,2.40,a,b,pan,piv);
-    const hz2=sg>0?W2-0.06:-W2+0.02;box(0.01,0.03,0.95,1.35,hz2,hz2+0.04,ss,piv);
-    piv.userData.dir=dr;kcl.push(piv);});})();
+  /* koelceldeur: één deur van 85 cm naast het aanrecht, draait naar de doorgang */
+  box(5.59,5.69,0,2.40,-2.37,-1.77,mat.wall);
+  {const DW=0.85,piv=new THREE.Group();piv.position.set(5.69,0,-0.92);scene.add(piv);
+   box(5.59,5.69,2.10,2.40,-1.77,-0.91,mat.wall);box(-0.10,0.01,0,2.10,-DW,0,pan,piv);box(0.01,0.03,0.95,1.35,-DW+0.03,-DW+0.07,ss,piv);
+   piv.userData.dir=-1;piv.userData.max=1.75;kcl.push(piv);}})();
 /* ---- kast in haardvolume eetruimte ---- */
 (function(){const Z0=9.10,Z1=9.60,oak=mat.oakLight,c=mat.carc;
   const led=new THREE.MeshBasicMaterial({color:0xfff1d6});
@@ -498,13 +510,8 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
     if(k===0){vase(a+0.3,0.765,0.32,0.07,0x3b3530);bowl(b-0.3,1.307,0.12,0xd9cfc0);bk(a+0.15,1.662,6,1);vase(b-0.25,1.662,0.18,0.06,0x8a6f57);bowl(a+0.45,2.017,0.09,0x6b6560);}
     else{bk(b-0.40,0.765,7,3);vase(a+0.30,1.307,0.24,0.08,0xcfc6b8);vase(b-0.3,1.662,0.20,0.05,0x2f2b28);bowl(a+0.35,1.662,0.1,0x8d8780);vase(a+0.5,2.017,0.30,0.055,0xb0533a);}
   });
-  /* dubbele deur in het midden, push-to-open, met legkast erachter */
-  const a=3.83,b=5.47,m=(a+b)/2;
-  box(a,b,0,0.02,Z0+0.03,Z1,c);box(a,b,KH-0.02,KH,Z0+0.03,Z1,c);box(a,b,0,KH,Z1-0.02,Z1,c);box(a,a+0.02,0,KH,Z0+0.03,Z1,c);box(b-0.02,b,0,KH,Z0+0.03,Z1,c);
-  [0.55,1.05,1.55,2.05].forEach((y,j)=>{box(a+0.02,b-0.02,y,y+0.02,Z0+0.05,Z1-0.02,c);
-    for(let n=0;n<9;n++)box(a+0.08+n*0.17,a+0.20+n*0.17,y+0.02,y+0.12+((n+j)%3)*0.07,Z0+0.15,Z1-0.08,C(n+j*3));});
-  [[b,-1,-(b-m)],[a,1,(m-a)]].forEach(([hx,dir,w])=>{const piv=new THREE.Group();piv.position.set(hx,0,Z0);scene.add(piv);
-    box(w<0?w+0.002:0.002,w<0?-0.002:w-0.002,0,KH,0,0.025,oak,piv);piv.userData.dir=dir;leaves.push(piv);});
+  /* middendeel: vaste houten wandbekleding (geen deuren), twee panelen met verticale naad */
+  box(3.83,5.47,0,KH,Z0,Z1,oak);box(4.648,4.652,0,KH,Z0-0.001,Z0+0.01,mat.handle);
 })();
 /* ---- extensief groen naast het terras + tuin aan de oostzijde ---- */
 (function(){let sd=11;const r=()=>{sd=(sd*16807)%2147483647;return sd/2147483647;};
@@ -548,16 +555,19 @@ compendium(3.28,1.85,1.45,4.75,H);compendium(5.52,1.85,1.45,4.75,H);
    const wt=new THREE.CanvasTexture(wc);wt.encoding=THREE.sRGBEncoding;wt.wrapS=wt.wrapT=THREE.RepeatWrapping;wt.repeat.set(1,6);
    const water=new THREE.Mesh(new THREE.PlaneGeometry(px1-px0,pz1-pz0),new THREE.MeshStandardMaterial({map:wt,color:0x7f9a98,roughness:.12,metalness:.35}));
    water.rotation.x=-Math.PI/2;water.position.set((px0+px1)/2,-0.06,(pz0+pz1)/2);water.receiveShadow=true;scene.add(water);window.__water=wt;
-   {const sm=[M(0x6f6a62,{roughness:.9}),M(0x635e57,{roughness:.9}),M(0x7a746b,{roughness:.9})],pts=[];
-     for(let t=0;t<400&&pts.length<24;t++){const u=r(),x=-0.45-u*1.55,z=3.1+(r()-.5)*(1.6-0.5*u)+Math.sin(u*3)*0.35;if(pts.every(([a,b])=>Math.hypot(a-x,b-z)>0.46))pts.push([x,z]);}
-     pts.forEach(([x,z],i)=>{const sh=new THREE.Shape(),n=5+((r()*3)|0),R=0.17+r()*0.08,el=0.7+r()*0.6,rot=r()*6.3;
-       for(let k=0;k<n;k++){const a=rot+k/n*Math.PI*2+(r()-.5)*0.5,rr=R*(0.8+r()*0.35);const px=Math.cos(a)*rr*el,pz=Math.sin(a)*rr/el;k?sh.lineTo(px,pz):sh.moveTo(px,pz);}
-       const g=new THREE.ExtrudeGeometry(sh,{depth:0.40,bevelEnabled:true,bevelThickness:0.01,bevelSize:0.01,bevelSegments:1});g.rotateX(Math.PI/2);
-       const m=new THREE.Mesh(g,sm[i%3]);m.position.set(x,-0.005,z);m.castShadow=m.receiveShadow=true;scene.add(m);});}
+   {const sm=[M(0x6f6a62,{roughness:.9}),M(0x635e57,{roughness:.9}),M(0x7a746b,{roughness:.9})];
+     /* rechthoekige dwarse plaat over de vijver */
+     box(px0+0.15,px1-0.15,-0.42,0.0,2.80,3.40,M(0x7a756d,{roughness:.85}));
+     /* organische stapstenen lopen verder in de tuin */
+     const pts=[];for(let t=0;t<600&&pts.length<20;t++){const u=r(),x=px0-0.55-u*4.2,z=3.1+(r()-.5)*(1.3+1.0*u)+u*1.8;if(pts.every(([a,b])=>Math.hypot(a-x,b-z)>0.50))pts.push([x,z]);}
+     pts.forEach(([x,z],i)=>{const sh=new THREE.Shape(),n=5+((r()*3)|0),R=0.18+r()*0.09,el=0.7+r()*0.6,rot=r()*6.3;
+       for(let k=0;k<n;k++){const a=rot+k/n*Math.PI*2+(r()-.5)*0.5,rr=R*(0.8+r()*0.35);const qx=Math.cos(a)*rr*el,qz=Math.sin(a)*rr/el;k?sh.lineTo(qx,qz):sh.moveTo(qx,qz);}
+       const g=new THREE.ExtrudeGeometry(sh,{depth:0.05,bevelEnabled:true,bevelThickness:0.006,bevelSize:0.008,bevelSegments:1});g.rotateX(Math.PI/2);
+       const m=new THREE.Mesh(g,sm[i%3]);m.position.set(x,0.025,z);m.castShadow=m.receiveShadow=true;scene.add(m);});}
    const lily=M(0x4f6b34,{roughness:.7});[[-1.9,6.2],[-1.6,6.6],[-1.95,7.1],[-1.0,9.8],[-1.3,10.3],[-1.8,12.4]].forEach(([x,z])=>{const l=new THREE.Mesh(new THREE.CircleGeometry(0.13+r()*0.08,14,0.3,5.8),lily);l.rotation.x=-Math.PI/2;l.position.set(x,-0.055,z);scene.add(l);});
-   __hako([px0-0.9,px0-0.2,0.3,14.5],26);}
+   __hako([px0-0.9,px0-0.2,0.3,2.3],5);__hako([px0-0.9,px0-0.2,6.2,14.5],17);}
   [[-5.5,-2.0,3.6,1.8],[-9.0,3.5,4.4,2.2],[-6.0,9.5,3.0,1.5],[-12.5,-3.5,4.8,2.4],[-13.0,8.0,3.8,1.9],[-8.5,15.0,4.2,2.1],[-16.5,2.5,5.0,2.5],[-17.5,13.5,3.6,1.8]].forEach(([x,z,h,c],k)=>tree(x,z,h,c,k+2));
-  for(let i=0;i<10;i++){const b=new THREE.Mesh(new THREE.IcosahedronGeometry(0.35+r()*0.25,1),leafM[i%4]);b.scale.y=0.7;b.position.set(-3.4-r()*1.2,0.25,0.5+i*1.0+r()*0.4);b.castShadow=true;scene.add(b);}
+  for(let i=0;i<10;i++){if(i>=2&&i<=6)continue;const b=new THREE.Mesh(new THREE.IcosahedronGeometry(0.35+r()*0.25,1),leafM[i%4]);b.scale.y=0.7;b.position.set(-3.4-r()*1.2,0.25,0.5+i*1.0+r()*0.4);b.castShadow=true;scene.add(b);}
   /* haag achteraan */
   box(16.6,38,0,1.8,-7.0,-6.2,M(0x3f5a2c,{roughness:1}));
 })();
@@ -620,6 +630,9 @@ function setWalls(isLow){low=isLow;const s=isLow?0.42:1;
   const b=document.getElementById('walls');b.setAttribute('aria-pressed',String(isLow));b.textContent=isLow?'Muren laag':'Muren volledig';}
 let doorsOpen=false,doorT=0,doorTarget=0,rdOpen=false,rdT=0,rdTarget=0;
 function setDoors(open){if(open!==doorsOpen)document.getElementById('doors').click();}
+let pkOpen=false,pkT=0,pkTarget=0;
+function setPk(open){if(open!==pkOpen)document.getElementById('pocket').click();}
+document.getElementById('pocket').addEventListener('click',()=>{pkOpen=!pkOpen;pkTarget=pkOpen?1:0;const b=document.getElementById('pocket');b.setAttribute('aria-pressed',String(pkOpen));b.textContent=pkOpen?'Schuifdeuren sluiten':'Schuifdeuren openen';});
 function setRoom(open){if(open!==rdOpen)document.getElementById('rdoors').click();}
 document.getElementById('doors').addEventListener('click',()=>{doorsOpen=!doorsOpen;doorTarget=doorsOpen?1:0;const b=document.getElementById('doors');b.setAttribute('aria-pressed',String(doorsOpen));b.textContent=doorsOpen?'Kasten sluiten':'Kasten openen';});
 document.getElementById('rdoors').addEventListener('click',()=>{rdOpen=!rdOpen;rdTarget=rdOpen?1:0;const b=document.getElementById('rdoors');b.setAttribute('aria-pressed',String(rdOpen));b.textContent=rdOpen?'Deuren sluiten':'Deuren openen';});
@@ -627,14 +640,12 @@ const views={
   'v-over':{p:[13.0,11.5,13.5],t:[4.2,0,2.8],low:true},
   'v-eil':{p:[4.4,1.9,5.9],t:[4.4,0.8,1.6],low:false},
   'v-kast':{p:[4.1,1.6,4.6],t:[4.1,1.4,-0.6],low:false},
-  'v-koffie':{p:[3.08,1.65,2.4],t:[3.08,1.3,-0.6],low:false,open:true},
-  'v-oven':{p:[5.78,1.65,2.4],t:[5.78,1.1,-0.6],low:false,open:true},
   'v-pantry':{p:[6.0,1.7,-1.3],t:[9.9,1.2,-1.6],low:false,open:true,room:true},
-  'v-terras':{p:[11.2,2.0,4.4],t:[11.4,0.9,-0.5],low:false,open:true,room:true},
+  'v-terras':{p:[11.2,2.0,4.4],t:[11.4,0.9,-0.5],low:false,open:true,room:true,pk:true},
   'v-haard':{p:[4.65,1.15,5.0],t:[4.65,1.5,9.4],low:false}
 };
 let anim=null;
-function go(id,instant){if(tour.on)stopTour();const v=views[id];setWalls(v.low);setDoors(!!v.open);setRoom(!!v.room);
+function go(id,instant){if(tour.on)stopTour();const v=views[id];setWalls(v.low);setDoors(!!v.open);setRoom(!!v.room);setPk(!!v.pk);
   document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed',String(b.id===id)));
   const p1=new THREE.Vector3(...v.p),t1=new THREE.Vector3(...v.t);
   if(instant||matchMedia('(prefers-reduced-motion: reduce)').matches){camera.position.copy(p1);controls.target.copy(t1);controls.update();return;}
@@ -652,14 +663,14 @@ const segW=(function(){const w=[];for(let i=0;i<KF.length-1;i++){const p0=new TH
 function tourParam(u){let i=0;while(i<segW.length-1&&u>segW[i])i++;const a=i?segW[i-1]:0,f=(u-a)/(segW[i]-a);return (i+f*f*(3-2*f)*0.35+f*0.65)/(KF.length-1);}
 const TOUR_MS=52000;const tour={on:false,t0:0};
 function setTourBtn(){const b=document.getElementById('tour');b.setAttribute('aria-pressed',String(tour.on));b.textContent=tour.on?'Rondleiding stoppen':'Rondleiding';}
-function startTour(){tour.on=true;tour.t0=performance.now();anim=null;setWalls(false);setDoors(false);setRoom(false);
+function startTour(){tour.on=true;tour.t0=performance.now();anim=null;setWalls(false);setDoors(false);setRoom(false);setPk(false);
   document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed','false'));setTourBtn();}
 function stopTour(){tour.on=false;setTourBtn();}
 document.getElementById('tour').addEventListener('click',()=>tour.on?stopTour():startTour());
 controls.addEventListener('start',()=>{if(tour.on)stopTour();});
 function tourStep(now){if(!tour.on)return;const u=Math.max(0,(now-tour.t0)/TOUR_MS);if(u>=1){setDoors(false);setRoom(false);stopTour();return;}
   const t=tourParam(u);camera.position.copy(cP.getPoint(t));controls.target.copy(cT.getPoint(t));
-  const idx=t*(KF.length-1);kcTour=(idx>8.55&&idx<9.75)?1:0;setDoors(idx>3.6&&idx<12.6);setRoom(idx>6.4&&idx<11.8);}
+  const idx=t*(KF.length-1);kcTour=(idx>8.55&&idx<9.75)?1:0;setDoors(idx>3.6&&idx<12.6);if(idx>3.6)setPk(true);setRoom(idx>6.4&&idx<11.8);}
 Object.keys(views).forEach(id=>document.getElementById(id).addEventListener('click',()=>go(id)));
 document.getElementById('walls').addEventListener('click',()=>setWalls(!low));
 function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
@@ -669,11 +680,12 @@ const ez=t=>(1-Math.cos(t*Math.PI))/2;
 function loop(now){
   if(anim){const k=Math.min(1,(now-anim.s)/900),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
     camera.position.lerpVectors(anim.p0,anim.p1,e);controls.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1)anim=null;}
-  {const kt=tour.on?kcTour:doorTarget;if(kcT!==kt){kcT+=Math.sign(kt-kcT)*0.03;if(Math.abs(kcT-kt)<0.03)kcT=kt;const e=ez(kcT);kcl.forEach(p=>p.rotation.y=p.userData.dir*Math.min(1,e*1.3)*1.75);}}
+  {const kt=tour.on?kcTour:doorTarget;if(kcT!==kt){kcT+=Math.sign(kt-kcT)*0.03;if(Math.abs(kcT-kt)<0.03)kcT=kt;const e=ez(kcT);kcl.forEach(p=>p.rotation.y=p.userData.dir*Math.min(1,e*1.3)*p.userData.max);}}
   if(window.__water){__water.offset.y+=0.0004;__water.offset.x=Math.sin(performance.now()/4000)*0.02;}
   if(doorT!==doorTarget){doorT+=Math.sign(doorTarget-doorT)*0.025;if(Math.abs(doorT-doorTarget)<0.025)doorT=doorTarget;
-    const e=ez(doorT);setPockets(e);setCabLed(e);if(window.__slide)__slide.position.x=e*3.07;leaves.forEach(p=>p.rotation.y=p.userData.dir*Math.min(1,e*1.5)*1.75);
+    const e=ez(doorT);leaves.forEach(p=>p.rotation.y=p.userData.dir*Math.min(1,e*1.5)*1.75);
     drawers.forEach((g,i)=>{const f=Math.max(0,Math.min(1,(e-0.5)*2.5-0.05*(i%4)));if(g.userData.ax)g.position.x=g.userData.ax*0.42*f;else g.position.z=0.38*f;});}
+  if(pkT!==pkTarget){pkT+=Math.sign(pkTarget-pkT)*0.025;if(Math.abs(pkT-pkTarget)<0.025)pkT=pkTarget;const e=ez(pkT);setPockets(e);setCabLed(e);if(window.__slide)__slide.position.x=e*3.07;}
   if(rdT!==rdTarget){rdT+=Math.sign(rdTarget-rdT)*0.04;if(Math.abs(rdT-rdTarget)<0.04)rdT=rdTarget;
     const a=ez(rdT)*1.5;roomDoors.forEach(p=>p.rotation.y=p.userData.dir*a);}
   if(window.__flames){const t=now/1000;__flames.forEach(({f,ph,h})=>{const k=0.75+0.35*Math.sin(t*7+ph)+0.15*Math.sin(t*13.3+ph*2);f.scale.set(1,k*h/0.35,1);f.position.y=0.98+k*h/2;f.material.opacity=0.55+0.35*Math.sin(t*9+ph)**2;});
